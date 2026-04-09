@@ -11,19 +11,14 @@
   const PKG_PER_ON = 20;   // kg produced per 1 second of on-time (fixed game mechanic)
   const PLATE_KG   = 800;  // kg of cooling per ice tempshift plate
 
-  /**
-   * Volcano data.
-   * rate     = community / datamined average (g/s)
-   * wikiRate = wiki-verified average (g/s) — all non-Niobium = 300
-   */
   const VOLCANOES = [
-    { name: 'Gold',      rate: 233.3,  wikiRate: 300,  color: '#e8c020' },
-    { name: 'Copper',    rate: 300,    wikiRate: 300,  color: '#d4784a' },
-    { name: 'Iron',      rate: 326.6,  wikiRate: 300,  color: '#a8a0a0' },
-    { name: 'Cobalt',    rate: 583.3,  wikiRate: 300,  color: '#4878d8' },
-    { name: 'Aluminium', rate: 466.6,  wikiRate: 300,  color: '#c0d8e8' },
-    { name: 'Niobium',   rate: 1200,   wikiRate: 1200, color: '#d0a8e0' },
-    { name: 'Tungsten',  rate: 380,    wikiRate: 300,  color: '#c8b890' },
+    { name: 'Gold',      rate: 233.3, color: '#e8c020' },
+    { name: 'Copper',    rate: 300,   color: '#d4784a' },
+    { name: 'Iron',      rate: 326.6, color: '#a8a0a0' },
+    { name: 'Cobalt',    rate: 583.3, color: '#4878d8' },
+    { name: 'Aluminium', rate: 466.6, color: '#c0d8e8' },
+    { name: 'Niobium',   rate: 1200,  color: '#d0a8e0' },
+    { name: 'Tungsten',  rate: 380,   color: '#c8b890' },
   ];
 
   // ════════════════════════════════════════
@@ -61,56 +56,7 @@
   }
 
   // ════════════════════════════════════════
-  //  DYNAMIC PRESETS
-  // ════════════════════════════════════════
-
-  /**
-   * Builds the preset-row for the currently selected volcano (or generic if none).
-   * Always shows:
-   *   [Wiki: X g/s]  (teal style — wiki-verified)
-   *   [Community: X g/s]  (blue style — only when different from wiki)
-   *   [250]  [400]  (generic round-number presets)
-   */
-  function renderPresets(volcano) {
-    const row    = el('preset-row');
-    const curVal = getN('rate');
-    row.innerHTML = '';
-
-    const presets = [];
-
-    if (volcano) {
-      presets.push({ label: `Wiki: ${volcano.wikiRate}`, val: volcano.wikiRate, cls: 'wiki' });
-      if (Math.abs(volcano.rate - volcano.wikiRate) >= 0.5) {
-        presets.push({ label: `Community: ${volcano.rate}`, val: volcano.rate, cls: 'community' });
-      }
-    }
-
-    // generic round numbers (skip if already in list)
-    [250, 400].forEach(v => {
-      if (!presets.some(p => Math.abs(p.val - v) < 0.5)) {
-        presets.push({ label: String(v), val: v, cls: '' });
-      }
-    });
-
-    presets.forEach(p => {
-      const btn = document.createElement('button');
-      btn.className = 'prs-btn' + (p.cls ? ' ' + p.cls : '');
-      btn.textContent = p.label;
-      btn.dataset.val = p.val;
-      if (Math.abs(p.val - curVal) < 0.15) btn.classList.add('active');
-      btn.addEventListener('click', () => setPreset(btn));
-      row.appendChild(btn);
-    });
-  }
-
-  function syncPresetHighlight(rate) {
-    document.querySelectorAll('#preset-row .prs-btn').forEach(b =>
-      b.classList.toggle('active', Math.abs(parseFloat(b.dataset.val) - rate) < 0.15)
-    );
-  }
-
-  // ════════════════════════════════════════
-  //  VOLCANO BUTTONS
+  //  VOLCANO BUTTONS (label only — no rate change)
   // ════════════════════════════════════════
   function selectVol(btn) {
     document.querySelectorAll('.vol-btn').forEach(b => {
@@ -120,54 +66,36 @@
     btn.classList.add('active');
     btn.setAttribute('aria-checked', 'true');
 
-    const rate    = parseFloat(btn.dataset.rate);
-    const volcano = VOLCANOES.find(v => Math.abs(v.rate - rate) < 0.15);
-    setN('rate', rate);
-    renderPresets(volcano);
-    syncMatchLabel(rate);
-    recalc();
+    const volName = btn.dataset.vol;
+    updateVolBadge(volName);
   }
 
-  function syncMatchLabel(rate) {
-    const lbl   = el('match-lbl');
-    const match = VOLCANOES.find(v => Math.abs(v.rate - rate) < 0.15);
-    if (match) {
-      const wikiNote = Math.abs(match.rate - match.wikiRate) >= 0.5
-        ? ` · wiki avg: ${match.wikiRate} g/s`
-        : '';
-      lbl.textContent = match.name + ' Volcano' + wikiNote;
-      lbl.classList.add('matched');
+  function updateVolBadge(name) {
+    const volcano = VOLCANOES.find(v => v.name === name);
+    const badgeName = el('vol-badge-name');
+    const badgeImg  = el('vol-badge-img');
+    const barTag    = el('bar-vol-tag');
+
+    if (volcano) {
+      badgeName.textContent = volcano.name + ' Volcano';
+      const imgSrc = 'assets/images/' + volcano.name.toLowerCase() + '_volcano.png';
+      badgeImg.src = imgSrc;
+      badgeImg.alt = volcano.name;
+      badgeImg.style.display = '';
+      badgeImg.onerror = function () { badgeImg.style.display = 'none'; };
+      barTag.textContent = '· ' + volcano.name + ' Volcano';
     } else {
-      lbl.textContent = '—';
-      lbl.classList.remove('matched');
+      badgeName.textContent = 'No volcano selected';
+      badgeImg.style.display = 'none';
+      badgeImg.src = '';
+      barTag.textContent = '';
     }
-  }
-
-  function syncVolBtns(rate) {
-    document.querySelectorAll('.vol-btn').forEach(b => {
-      const matches = Math.abs(parseFloat(b.dataset.rate) - rate) < 0.15;
-      b.classList.toggle('active', matches);
-      b.setAttribute('aria-checked', matches ? 'true' : 'false');
-    });
   }
 
   // ════════════════════════════════════════
   //  RATE INPUT
   // ════════════════════════════════════════
   function onRateChange() {
-    const rate = getN('rate');
-    syncPresetHighlight(rate);
-    syncMatchLabel(rate);
-    syncVolBtns(rate);
-    recalc();
-  }
-
-  function setPreset(btn) {
-    const v = parseFloat(btn.dataset.val);
-    setN('rate', v);
-    syncPresetHighlight(v);
-    syncMatchLabel(v);
-    syncVolBtns(v);
     recalc();
   }
 
@@ -298,7 +226,7 @@
   //  EVENT WIRING
   // ════════════════════════════════════════
   function wireEvents() {
-    // Volcano selector buttons
+    // Volcano selector buttons (label only — does NOT change rate)
     document.querySelectorAll('.vol-btn').forEach(btn =>
       btn.addEventListener('click', () => selectVol(btn))
     );
@@ -358,16 +286,6 @@
   // ════════════════════════════════════════
   function init() {
     wireEvents();
-
-    // Default to Iron volcano
-    const ironBtn = document.querySelector('.vol-btn[data-rate="326.6"]');
-    if (ironBtn) {
-      ironBtn.classList.add('active');
-      ironBtn.setAttribute('aria-checked', 'true');
-    }
-    const ironVol = VOLCANOES.find(v => v.name === 'Iron');
-    renderPresets(ironVol);
-    syncMatchLabel(326.6);
     recalc();
   }
 
