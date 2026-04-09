@@ -12,13 +12,13 @@
   const PLATE_KG   = 800;  // kg of cooling per ice tempshift plate
 
   const VOLCANOES = [
-    { name: 'Gold',      rate: 233.3, color: '#e8c020' },
-    { name: 'Copper',    rate: 300,   color: '#d4784a' },
-    { name: 'Iron',      rate: 326.6, color: '#a8a0a0' },
-    { name: 'Cobalt',    rate: 583.3, color: '#4878d8' },
-    { name: 'Aluminium', rate: 466.6, color: '#c0d8e8' },
-    { name: 'Niobium',   rate: 1200,  color: '#d0a8e0' },
-    { name: 'Tungsten',  rate: 380,   color: '#c8b890' },
+    { name: 'Gold',      color: '#e8c020' },
+    { name: 'Copper',    color: '#d4784a' },
+    { name: 'Iron',      color: '#a8a0a0' },
+    { name: 'Cobalt',    color: '#4878d8' },
+    { name: 'Aluminium', color: '#c0d8e8' },
+    { name: 'Niobium',   color: '#d0a8e0' },
+    { name: 'Tungsten',  color: '#c8b890' },
   ];
 
   // ════════════════════════════════════════
@@ -71,27 +71,21 @@
   }
 
   function updateVolDisplay(name) {
-    const volcano  = VOLCANOES.find(v => v.name === name);
-    const infoRate = el('vol-info-rate');
+    const volcano = VOLCANOES.find(v => v.name === name);
     const cardImg  = el('vol-card-img');
     const cardName = el('vol-card-name');
-    const cardRate = el('vol-card-rate');
 
     if (volcano) {
-      infoRate.textContent = volcano.rate + ' g/s';
       const imgSrc = 'assets/images/' + volcano.name.toLowerCase() + '_volcano.png';
       cardImg.src  = imgSrc;
       cardImg.alt  = volcano.name;
       cardImg.style.display = '';
       cardImg.onerror = function () { cardImg.style.display = 'none'; };
       cardName.textContent = volcano.name + ' Volcano';
-      cardRate.textContent = volcano.rate + ' g/s reference output';
     } else {
-      infoRate.textContent = '— g/s';
       cardImg.style.display = 'none';
       cardImg.src  = '';
       cardName.textContent = '—';
-      cardRate.textContent = '';
     }
   }
 
@@ -160,6 +154,7 @@
     el('r-eff-bar').style.width = Math.min(eff, 100) + '%';
     el('r-warn').classList.toggle('show', overflow);
 
+    setText('vol-card-rate', rate + ' g/s');
     setText('r-f1',    `(${pkgG}g ÷ ${rate})`);
     setText('r-f-on',  onTime);
     setText('r-f-on2', onTime);
