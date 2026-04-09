@@ -6,7 +6,7 @@
   <title>ONI Tools</title>
   <link rel="icon" href="assets/images/volcano.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@latest/index.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 <div class="app">
@@ -28,332 +28,396 @@
   </nav>
   <div class="hdr-rule" aria-hidden="true"></div>
 
-  <!-- ══ INPUT BLOCK ══ -->
-  <section class="block" aria-label="Inputs">
-    <div class="block-bar">
-      <div class="bar-accent orange" aria-hidden="true"></div>
-      <span class="bar-title">Inputs</span>
-    </div>
-    <div class="input-body">
+  <!-- ══ PAGE LAYOUT ══ -->
+  <div class="page-layout">
 
-      <!-- Volcano type selector -->
-      <div class="vol-row-wrap">
-        <span class="lbl" id="vol-label">Volcano Type</span>
-        <div class="vol-grid" id="vol-grid" role="radiogroup" aria-labelledby="vol-label">
+    <!-- ════════════════════════════════════
+         SIDEBAR
+    ════════════════════════════════════ -->
+    <aside class="sidebar">
 
-          <!-- Gold -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Gold" style="--mat-clr:#e8c020">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/gold_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#e8c020" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#e8c020" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#e8c020" opacity="0.9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="vol-name">Gold</div>
-            </div>
-          </button>
+      <!-- ── VOLCANO SECTION ── -->
+      <div class="sb-section volcano-sb">
+        <div class="sb-section-hdr">
+          <div class="bar-accent orange" aria-hidden="true"></div>
+          <span>Volcano</span>
+        </div>
+        <div class="sb-body">
 
-          <!-- Copper -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Copper" style="--mat-clr:#d4784a">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/copper_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#d4784a" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#d4784a" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#d4784a" opacity="0.9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="vol-name">Copper</div>
-            </div>
-          </button>
+          <!-- Type -->
+          <div class="sb-group">
+            <span class="sb-lbl" id="vol-type-lbl">Type</span>
+            <div class="vol-grid" role="radiogroup" aria-labelledby="vol-type-lbl">
 
-          <!-- Iron -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Iron" style="--mat-clr:#a8a0a0">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/iron_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#a8a0a0" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#a8a0a0" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#a8a0a0" opacity="0.9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="vol-name">Iron</div>
-            </div>
-          </button>
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Gold" style="--mat-clr:#e8c020">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/gold_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#e8c020" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#e8c020" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#e8c020" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Gold</span>
+              </button>
 
-          <!-- Cobalt -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Cobalt" style="--mat-clr:#4878d8">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/cobalt_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#4878d8" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#4878d8" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#4878d8" opacity="0.9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="vol-name">Cobalt</div>
-            </div>
-          </button>
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Copper" style="--mat-clr:#d4784a">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/copper_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#d4784a" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#d4784a" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#d4784a" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Copper</span>
+              </button>
 
-          <!-- Aluminium -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Aluminium" style="--mat-clr:#c0d8e8">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/aluminium_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#c0d8e8" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c0d8e8" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#c0d8e8" opacity="0.9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="vol-name">Aluminium</div>
-            </div>
-          </button>
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Iron" style="--mat-clr:#a8a0a0">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/iron_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#a8a0a0" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#a8a0a0" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#a8a0a0" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Iron</span>
+              </button>
 
-          <!-- Niobium -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Niobium" style="--mat-clr:#d0a8e0">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/niobium_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#d0a8e0" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#d0a8e0" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#d0a8e0" opacity="0.9"/>
-              </svg>
-            </div>
-            <div>
-              <div class="vol-name">Niobium</div>
-            </div>
-          </button>
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Cobalt" style="--mat-clr:#4878d8">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/cobalt_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#4878d8" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#4878d8" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#4878d8" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Cobalt</span>
+              </button>
 
-          <!-- Tungsten -->
-          <button class="vol-btn" role="radio" aria-checked="false" data-vol="Tungsten" style="--mat-clr:#c8b890">
-            <div class="vol-icon-wrap" aria-hidden="true">
-              <img src="assets/images/tungsten_volcano.png" alt="">
-              <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#c8b890" stroke-width="0.8"/>
-                <polygon points="5,21 11,10 17,21" fill="#333"/>
-                <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c8b890" stroke-width="1.5" stroke-linecap="square"/>
-                <rect x="8" y="1" width="6" height="4" fill="#c8b890" opacity="0.9"/>
-              </svg>
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Aluminium" style="--mat-clr:#c0d8e8">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/aluminium_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#c0d8e8" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c0d8e8" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#c0d8e8" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Alum.</span>
+              </button>
+
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Niobium" style="--mat-clr:#d0a8e0">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/niobium_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#d0a8e0" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#d0a8e0" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#d0a8e0" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Niob.</span>
+              </button>
+
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Tungsten" style="--mat-clr:#c8b890">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/tungsten_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#c8b890" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c8b890" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#c8b890" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Tung.</span>
+              </button>
+
+            </div><!-- /vol-grid -->
+          </div><!-- /sb-group type -->
+
+          <!-- Eruption Rate -->
+          <div class="sb-group">
+            <span class="sb-lbl">Eruption Rate</span>
+            <div class="step-wrap highlight" id="rate-wrap">
+              <button class="step-btn" data-target="rate" data-delta="-10" aria-label="−10">−10</button>
+              <button class="step-btn" data-target="rate" data-delta="-1"  aria-label="−1">−1</button>
+              <input class="step-input sz-md" type="number" id="rate" value="300" step="0.1" min="0.1" aria-label="Eruption rate in g/s">
+              <div class="unit-tag" aria-hidden="true">g/s</div>
+              <button class="step-btn right" data-target="rate" data-delta="1"  aria-label="+1">+1</button>
+              <button class="step-btn right" data-target="rate" data-delta="10" aria-label="+10">+10</button>
             </div>
-            <div>
-              <div class="vol-name">Tungsten</div>
-            </div>
-          </button>
-
-        </div><!-- /vol-grid -->
-      </div><!-- /vol-row-wrap -->
-
-      <!-- Timer + Steam inputs side by side -->
-      <div class="inputs-flex">
-
-        <!-- Production Rate / Timer Inputs -->
-        <div class="timer-col">
-          <span class="lbl important">Production Rate</span>
-          <div class="step-wrap highlight" id="rate-wrap">
-            <button class="step-btn" data-target="rate" data-delta="-50" aria-label="Decrease rate by 50">−50</button>
-            <button class="step-btn" data-target="rate" data-delta="-10" aria-label="Decrease rate by 10">−10</button>
-            <button class="step-btn" data-target="rate" data-delta="-1" aria-label="Decrease rate by 1">−1</button>
-            <input class="step-input sz-lg" type="number" id="rate" value="300" step="0.1" min="0.1" aria-label="Production rate in g/s">
-            <div class="unit-tag" aria-hidden="true">g/s</div>
-            <button class="step-btn right" data-target="rate" data-delta="1" aria-label="Increase rate by 1">+1</button>
-            <button class="step-btn right" data-target="rate" data-delta="10" aria-label="Increase rate by 10">+10</button>
-            <button class="step-btn right" data-target="rate" data-delta="50" aria-label="Increase rate by 50">+50</button>
           </div>
 
-        </div><!-- /timer-col -->
+          <!-- Eruption Period -->
+          <div class="sb-group">
+            <span class="sb-lbl">Eruption Period</span>
+            <div class="period-row">
+              <div class="step-wrap">
+                <button class="step-btn" data-target="erupt-time" data-delta="-1">−</button>
+                <input class="step-input sz-sm" type="number" id="erupt-time" value="60" step="1" min="1" aria-label="Active eruption seconds">
+                <div class="unit-tag" aria-hidden="true">s</div>
+                <button class="step-btn right" data-target="erupt-time" data-delta="1">+</button>
+              </div>
+              <span class="period-sep">every</span>
+              <div class="step-wrap">
+                <button class="step-btn" data-target="erupt-period" data-delta="-10">−</button>
+                <input class="step-input sz-sm" type="number" id="erupt-period" value="600" step="1" min="1" aria-label="Total eruption cycle seconds">
+                <div class="unit-tag" aria-hidden="true">s</div>
+                <button class="step-btn right" data-target="erupt-period" data-delta="10">+</button>
+              </div>
+            </div>
+            <span class="field-hint">active s / total s per eruption cycle</span>
+          </div>
 
-        <!-- Steam Room Inputs -->
-        <div class="steam-col">
-          <span class="lbl important teal-lbl">Steam Room</span>
+          <!-- Active Period -->
+          <div class="sb-group">
+            <span class="sb-lbl">Active Period</span>
+            <div class="period-row">
+              <div class="step-wrap">
+                <button class="step-btn" data-target="active-cycles" data-delta="-1">−</button>
+                <input class="step-input sz-sm" type="number" id="active-cycles" value="25" step="1" min="1" aria-label="Active cycles">
+                <div class="unit-tag" aria-hidden="true">cy</div>
+                <button class="step-btn right" data-target="active-cycles" data-delta="1">+</button>
+              </div>
+              <span class="period-sep">every</span>
+              <div class="step-wrap">
+                <button class="step-btn" data-target="total-cycles" data-delta="-1">−</button>
+                <input class="step-input sz-sm" type="number" id="total-cycles" value="60" step="1" min="1" aria-label="Total cycles including dormancy">
+                <div class="unit-tag" aria-hidden="true">cy</div>
+                <button class="step-btn right" data-target="total-cycles" data-delta="1">+</button>
+              </div>
+            </div>
+            <span class="field-hint">active cy / total cy (active + dormant)</span>
+          </div>
 
-          <div>
-            <span class="lbl teal-lbl">Room Dimensions</span>
+          <!-- Next Dormancy -->
+          <div class="sb-group">
+            <span class="sb-lbl">Next Dormancy</span>
+            <div class="dormancy-row">
+              <div class="step-wrap" id="dormancy-wrap">
+                <button class="step-btn" data-target="next-dormancy" data-delta="-1">−</button>
+                <input class="step-input sz-sm" type="number" id="next-dormancy" value="10" step="1" min="0" aria-label="Cycles until next dormancy">
+                <div class="unit-tag" aria-hidden="true">cycles</div>
+                <button class="step-btn right" data-target="next-dormancy" data-delta="1">+</button>
+              </div>
+              <button class="dormant-btn" id="dormant-btn" aria-pressed="false">Dormant</button>
+            </div>
+          </div>
+
+          <!-- Avg Output -->
+          <div class="avg-output-box">
+            <span class="avg-output-lbl">Avg Output</span>
+            <span class="avg-output-val" id="avg-output-val">— g/s</span>
+          </div>
+
+        </div><!-- /sb-body volcano -->
+      </div><!-- /volcano-sb -->
+
+      <!-- ── STEAM ROOM SECTION ── -->
+      <div class="sb-section steam-sb">
+        <div class="sb-section-hdr">
+          <div class="bar-accent teal" aria-hidden="true"></div>
+          <span>Steam Room</span>
+        </div>
+        <div class="sb-body">
+
+          <!-- Pressure per tile -->
+          <div class="sb-group">
+            <span class="sb-lbl teal-lbl">
+              Pressure per Tile
+              <span class="sb-note">default 50 kg</span>
+            </span>
+            <div class="step-wrap teal">
+              <button class="step-btn" data-target="kg-tile" data-delta="-10">−10</button>
+              <button class="step-btn" data-target="kg-tile" data-delta="-1">−1</button>
+              <input class="step-input sz-md" type="number" id="kg-tile" value="50" step="1" min="1" aria-label="kg per tile pressure">
+              <div class="unit-tag" aria-hidden="true">kg</div>
+              <button class="step-btn right" data-target="kg-tile" data-delta="1">+1</button>
+              <button class="step-btn right" data-target="kg-tile" data-delta="10">+10</button>
+            </div>
+          </div>
+
+          <!-- Room Dimensions -->
+          <div class="sb-group">
+            <span class="sb-lbl teal-lbl">Room Dimensions</span>
             <div class="wh-row">
               <div>
-                <span class="lbl small">Width</span>
+                <span class="sb-lbl small">Width</span>
                 <div class="step-wrap teal">
-                  <button class="step-btn" data-target="dim-w" data-delta="-1" aria-label="Decrease width">−</button>
-                  <input class="step-input sz-md" type="number" id="dim-w" value="4" step="1" min="1" aria-label="Room width in tiles">
+                  <button class="step-btn" data-target="dim-w" data-delta="-1">−</button>
+                  <input class="step-input sz-sm" type="number" id="dim-w" value="4" step="1" min="1" aria-label="Width in tiles">
                   <div class="unit-tag" aria-hidden="true">W</div>
-                  <button class="step-btn right" data-target="dim-w" data-delta="1" aria-label="Increase width">+</button>
+                  <button class="step-btn right" data-target="dim-w" data-delta="1">+</button>
                 </div>
               </div>
               <div class="wh-x" aria-hidden="true">×</div>
               <div>
-                <span class="lbl small">Height</span>
+                <span class="sb-lbl small">Height</span>
                 <div class="step-wrap teal">
-                  <button class="step-btn" data-target="dim-h" data-delta="-1" aria-label="Decrease height">−</button>
-                  <input class="step-input sz-md" type="number" id="dim-h" value="16" step="1" min="1" aria-label="Room height in tiles">
+                  <button class="step-btn" data-target="dim-h" data-delta="-1">−</button>
+                  <input class="step-input sz-sm" type="number" id="dim-h" value="16" step="1" min="1" aria-label="Height in tiles">
                   <div class="unit-tag" aria-hidden="true">H</div>
-                  <button class="step-btn right" data-target="dim-h" data-delta="1" aria-label="Increase height">+</button>
+                  <button class="step-btn right" data-target="dim-h" data-delta="1">+</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div>
-            <span class="lbl teal-lbl">Total Tiles</span>
+          <!-- Total Tiles -->
+          <div class="sb-group">
+            <span class="sb-lbl teal-lbl">Total Tiles</span>
             <div class="step-wrap teal">
-              <button class="step-btn" data-target="tiles" data-delta="-50" aria-label="Decrease tiles by 50">−50</button>
-              <button class="step-btn" data-target="tiles" data-delta="-10" aria-label="Decrease tiles by 10">−10</button>
-              <button class="step-btn" data-target="tiles" data-delta="-1" aria-label="Decrease tiles by 1">−1</button>
+              <button class="step-btn" data-target="tiles" data-delta="-10">−10</button>
+              <button class="step-btn" data-target="tiles" data-delta="-1">−1</button>
               <input class="step-input sz-md" type="number" id="tiles" value="64" step="1" min="1" aria-label="Total tiles">
               <div class="unit-tag" aria-hidden="true">tiles</div>
-              <button class="step-btn right" data-target="tiles" data-delta="1" aria-label="Increase tiles by 1">+1</button>
-              <button class="step-btn right" data-target="tiles" data-delta="10" aria-label="Increase tiles by 10">+10</button>
-              <button class="step-btn right" data-target="tiles" data-delta="50" aria-label="Increase tiles by 50">+50</button>
+              <button class="step-btn right" data-target="tiles" data-delta="1">+1</button>
+              <button class="step-btn right" data-target="tiles" data-delta="10">+10</button>
             </div>
           </div>
 
-        </div><!-- /steam-col -->
+        </div><!-- /sb-body steam -->
+      </div><!-- /steam-sb -->
 
-      </div><!-- /inputs-flex -->
+    </aside><!-- /sidebar -->
 
-    </div><!-- /input-body -->
-  </section>
+    <!-- ════════════════════════════════════
+         MAIN CONTENT — Results
+    ════════════════════════════════════ -->
+    <main class="main-content">
+      <div class="result-body">
 
-  <!-- ══ RESULT BLOCK ══ -->
-  <section class="block" aria-label="Results">
-    <div class="block-bar">
-      <div class="bar-accent green" aria-hidden="true"></div>
-      <span class="bar-title">Results</span>
-    </div>
-    <div class="result-body">
+        <!-- Volcano Card — col 1 -->
+        <div class="vol-result">
+          <div class="block-bar result-section-bar">
+            <div class="bar-accent orange" aria-hidden="true"></div>
+            <span class="bar-title">Volcano</span>
+          </div>
+          <div class="vol-card-standalone" aria-live="polite">
+            <img id="vol-card-img" src="" alt="" class="vol-card-icon" style="display:none">
+            <div class="vol-card-name" id="vol-card-name">—</div>
+            <div class="vol-card-rate" id="vol-card-rate"></div>
+          </div>
+        </div><!-- /vol-result -->
 
-      <!-- Volcano Card — col 1 -->
-      <div class="vol-result">
-        <div class="block-bar result-section-bar">
-          <div class="bar-accent orange" aria-hidden="true"></div>
-          <span class="bar-title">Volcano</span>
-        </div>
-        <div class="vol-card-standalone" aria-live="polite">
-          <img id="vol-card-img" src="" alt="" class="vol-card-icon" style="display:none">
-          <div class="vol-card-name" id="vol-card-name">—</div>
-          <div class="vol-card-rate" id="vol-card-rate"></div>
-        </div>
-      </div><!-- /vol-result -->
-
-      <!-- Timer Results — col 2 -->
-      <div class="timer-result">
-        <div class="block-bar result-section-bar">
-          <div class="bar-accent orange" aria-hidden="true"></div>
-          <span class="bar-title">Timer — OFF / ON</span>
-        </div>
-        <div class="timer-main" aria-live="polite">
-          <div class="t-block">
-            <div class="t-lbl">Off Duration</div>
-            <div class="t-num off" id="r-off">—</div>
-            <div class="t-unit">seconds</div>
+        <!-- Timer Results — col 2 -->
+        <div class="timer-result">
+          <div class="block-bar result-section-bar">
+            <div class="bar-accent orange" aria-hidden="true"></div>
+            <span class="bar-title">Timer — OFF / ON</span>
           </div>
-          <div class="t-slash" aria-hidden="true">/</div>
-          <div class="t-block">
-            <div class="t-lbl">On Duration</div>
-            <div class="t-num on" id="r-on">—</div>
-            <div class="t-unit">seconds</div>
-          </div>
-        </div>
-        <div class="stat-row" aria-live="polite">
-          <div class="stat-cell">
-            <div class="s-lbl">Cycle</div>
-            <div class="s-val"><span id="r-cycle">—</span> <small>s</small></div>
-          </div>
-          <div class="stat-cell">
-            <div class="s-lbl">Per Cycle</div>
-            <div class="s-val"><span id="r-produced">—</span> <small>kg</small></div>
-          </div>
-          <div class="stat-cell">
-            <div class="s-lbl">Throughput</div>
-            <div class="s-val"><span id="r-thru">—</span> <small>kg/s</small></div>
-          </div>
-        </div>
-        <div class="eff-wrap" aria-label="Timer efficiency">
-          <span class="eff-label">Efficiency</span>
-          <div class="eff-bar-track" aria-hidden="true">
-            <div class="eff-bar-fill" id="r-eff-bar"></div>
-          </div>
-          <span class="eff-pct" id="r-eff-pct" aria-live="polite">—</span>
-        </div>
-        <div class="formula-box">
-          <div class="f-lbl">Formula</div>
-          <div class="f-body">
-            X = <span class="hi">(pkg_g ÷ rate)</span> − on_time &nbsp;|&nbsp;
-            X = <span class="hi" id="r-f1">—</span> − <span id="r-f-on">—</span> = <span class="hi" id="r-f2">—</span>
-            &nbsp;→&nbsp;
-            <span class="hi2" id="r-f3">—</span>s OFF / <span class="hi2" id="r-f-on2">—</span>s ON
-          </div>
-        </div>
-        <div class="warn" id="r-warn" role="alert">
-          Accumulation exceeds package — loader may overflow. Reduce OFF by 1s.
-        </div>
-      </div><!-- /timer-result -->
-
-      <!-- Steam Results — col 3 -->
-      <div class="steam-result">
-        <div class="block-bar result-section-bar">
-          <div class="bar-accent teal" aria-hidden="true"></div>
-          <img src="assets/images/tempshift_plate.png"
-               alt=""
-               class="tempshift-icon"
-               id="tempshift-icon">
-          <span class="bar-title">Steam Room — Ice Tempshift Plates</span>
-        </div>
-        <div class="timer-main" aria-live="polite">
-          <div class="t-block">
-            <div class="t-lbl">Total Needed</div>
-            <div class="t-num orange" id="sc-total">—</div>
-            <div class="t-unit">
-              kg &nbsp;( <span id="sc-tiles-echo">—</span> × 50 kg )
+          <div class="timer-main" aria-live="polite">
+            <div class="t-block">
+              <div class="t-lbl">Off Duration</div>
+              <div class="t-num off" id="r-off">—</div>
+              <div class="t-unit">seconds</div>
+            </div>
+            <div class="t-slash" aria-hidden="true">/</div>
+            <div class="t-block">
+              <div class="t-lbl">On Duration</div>
+              <div class="t-num on" id="r-on">—</div>
+              <div class="t-unit">seconds</div>
             </div>
           </div>
-          <div class="t-slash" aria-hidden="true">/</div>
-          <div class="t-block">
-            <div class="t-lbl">Ice Plates</div>
-            <div class="t-num ice" id="sc-plates">—</div>
-            <div class="t-unit"><span id="sc-exact"></span></div>
-          </div>
-        </div>
-        <div class="steam-card" aria-live="polite">
-          <div class="ice-plates-row">
-            <div class="plate-nudge">
-              <button class="plate-nudge-btn" data-delta="-1" aria-label="Remove one plate">−1 plate</button>
-              <button class="plate-nudge-btn" data-delta="1"  aria-label="Add one plate">+1 plate</button>
+          <div class="stat-row" aria-live="polite">
+            <div class="stat-cell">
+              <div class="s-lbl">Cycle</div>
+              <div class="s-val"><span id="r-cycle">—</span> <small>s</small></div>
+            </div>
+            <div class="stat-cell">
+              <div class="s-lbl">Per Cycle</div>
+              <div class="s-val"><span id="r-produced">—</span> <small>kg</small></div>
+            </div>
+            <div class="stat-cell">
+              <div class="s-lbl">Throughput</div>
+              <div class="s-val"><span id="r-thru">—</span> <small>kg/s</small></div>
             </div>
           </div>
-          <div class="plate-grid" id="plate-grid">
-            <div class="plate-cell" id="pc-total-mass">
-              <div class="pc-label">Plates × 800 kg</div>
-              <div class="pc-value" id="pc-plates-kg">—</div>
-              <div class="pc-sub"   id="pc-plates-sum">—</div>
+          <div class="eff-wrap" aria-label="Timer efficiency">
+            <span class="eff-label">Efficiency</span>
+            <div class="eff-bar-track" aria-hidden="true">
+              <div class="eff-bar-fill" id="r-eff-bar"></div>
             </div>
-            <div class="plate-cell" id="pc-delta">
-              <div class="pc-label">vs Target</div>
-              <div class="pc-value" id="pc-delta-val">—</div>
-              <div class="pc-sub"   id="pc-delta-sub">—</div>
+            <span class="eff-pct" id="r-eff-pct" aria-live="polite">—</span>
+          </div>
+          <div class="formula-box">
+            <div class="f-lbl">Formula</div>
+            <div class="f-body">
+              X = <span class="hi">(pkg_g ÷ rate)</span> − on_time &nbsp;|&nbsp;
+              X = <span class="hi" id="r-f1">—</span> − <span id="r-f-on">—</span> = <span class="hi" id="r-f2">—</span>
+              &nbsp;→&nbsp;
+              <span class="hi2" id="r-f3">—</span>s OFF / <span class="hi2" id="r-f-on2">—</span>s ON
             </div>
           </div>
-        </div><!-- /steam-card -->
-      </div><!-- /steam-result -->
+          <div class="warn" id="r-warn" role="alert">
+            Accumulation exceeds package — loader may overflow. Reduce OFF by 1s.
+          </div>
+        </div><!-- /timer-result -->
 
-    </div><!-- /result-body -->
-  </section>
+        <!-- Steam Results — col 3 -->
+        <div class="steam-result">
+          <div class="block-bar result-section-bar">
+            <div class="bar-accent teal" aria-hidden="true"></div>
+            <img src="assets/images/tempshift_plate.png"
+                 alt=""
+                 class="tempshift-icon"
+                 id="tempshift-icon">
+            <span class="bar-title">Steam Room — Ice Tempshift Plates</span>
+          </div>
+          <div class="timer-main" aria-live="polite">
+            <div class="t-block">
+              <div class="t-lbl">Total Needed</div>
+              <div class="t-num orange" id="sc-total">—</div>
+              <div class="t-unit">
+                kg &nbsp;( <span id="sc-tiles-echo">—</span> × <span id="sc-kgt-echo">—</span> kg )
+              </div>
+            </div>
+            <div class="t-slash" aria-hidden="true">/</div>
+            <div class="t-block">
+              <div class="t-lbl">Ice Plates</div>
+              <div class="t-num ice" id="sc-plates">—</div>
+              <div class="t-unit"><span id="sc-exact"></span></div>
+            </div>
+          </div>
+          <div class="steam-card" aria-live="polite">
+            <div class="ice-plates-row">
+              <div class="plate-nudge">
+                <button class="plate-nudge-btn" data-delta="-1" aria-label="Remove one plate">−1 plate</button>
+                <button class="plate-nudge-btn" data-delta="1"  aria-label="Add one plate">+1 plate</button>
+              </div>
+            </div>
+            <div class="plate-grid" id="plate-grid">
+              <div class="plate-cell" id="pc-total-mass">
+                <div class="pc-label">Plates × 800 kg</div>
+                <div class="pc-value" id="pc-plates-kg">—</div>
+                <div class="pc-sub"   id="pc-plates-sum">—</div>
+              </div>
+              <div class="plate-cell" id="pc-delta">
+                <div class="pc-label">vs Target</div>
+                <div class="pc-value" id="pc-delta-val">—</div>
+                <div class="pc-sub"   id="pc-delta-sub">—</div>
+              </div>
+            </div>
+          </div><!-- /steam-card -->
+        </div><!-- /steam-result -->
+
+      </div><!-- /result-body -->
+    </main><!-- /main-content -->
+
+  </div><!-- /page-layout -->
 
   <footer>ONI Tools — Fan Tool — Not affiliated with Klei Entertainment</footer>
 
 </div><!-- /app -->
 
-<script src="main.js?v=5"></script>
+<script src="main.js?v=6"></script>
 </body>
 </html>
