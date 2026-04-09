@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with code in this repository.
 
 ## Development
 
@@ -8,44 +8,57 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev   # serves on http://localhost:3000 with auto-open
 ```
 
-No build step — this is a static site (HTML + CSS + JS).
+No build step — static site (HTML + CSS + JS). Only dev dependency is `http-server`.
 
 ## Git Workflow
 
-After completing any meaningful unit of work, commit and push to GitHub:
-
-```bash
-git add <files>
-git commit -m "type: short description"
-git push
-```
-
-- Commit after each logical change (feature, fix, refactor) — don't batch unrelated work
-- Use conventional commit prefixes: `feat:`, `fix:`, `chore:`, `refactor:`, `style:`
-- Push after every commit so work is never lost locally
+- Commit after each logical change: `git commit -m "type: short description"` then `git push`
+- Prefixes: `feat:`, `fix:`, `chore:`, `refactor:`, `style:`
+- Push after every commit
 
 ## Architecture
 
-Single-page tool with three files:
+**ONI Tools** — fan calculator site for Oxygen Not Included. Tab-based shell with one active tool: Volcano Timer.
 
-- **`index.html`** — full markup, all DOM IDs, volcano buttons with inline SVG fallbacks
-- **`styles.css`** — warm ONI sepia palette via CSS custom properties (`--bg`, `--orange`, `--ice`, etc.), component styles (.block, .step-wrap, .vol-btn, etc.)
-- **`main.js`** — single IIFE, no dependencies; all logic lives here
+### Files
+
+| File | Role |
+|------|------|
+| `index.html` | Full markup, DOM IDs, volcano buttons with inline SVG fallbacks, tab bar |
+| `styles.css` | Dark blue-grey ONI palette via CSS custom properties, spacing scale (`--sp-*`), component styles |
+| `main.js` | Single IIFE, no dependencies; all logic + event wiring |
+
+### Color palette
+
+Dark mode inspired by the ONI game UI:
+- Background: `--bg` (#0d1117), panels: `--panel` / `--panel-lt`
+- Heat/volcano accent: `--orange` / `--orange-lt`
+- Steam/cool accent: `--teal` / `--teal-lt`
+- Text: `--text` (primary), `--text-muted` (secondary)
 
 ### Two calculators
 
-**Timer Sensor** (`calcTimer`): computes OFF/ON durations so a conveyor loader fills exactly one package. Key constants: `PKG_PER_ON = 20` kg per second of on-time (fixed game mechanic). Formula: `off = round((pkg_g / rate) - on_time)`.
+**Timer** (`calcTimer`): OFF/ON durations so a conveyor loader fills exactly one package.
+- Key constant: `PKG_PER_ON = 20` kg per second of on-time
+- Formula: `off = round((pkg_g / rate) - on_time)`
 
-**Steam Room** (`calcSteam` / `renderSteam`): calculates ice tempshift plates needed to absorb steam. Key constant: `PLATE_KG = 800` kg of cooling per plate. Plate count can be nudged ±1 via `_plateOffset`.
+**Steam Room** (`calcSteam` / `renderSteam`): ice tempshift plates needed to absorb steam.
+- Key constant: `PLATE_KG = 800` kg per plate
+- Plate count nudgeable via `_plateOffset`
+
+### Volcano data
+
+`VOLCANOES` array has both `rate` (community/datamined) and `wikiRate` (wiki-verified: 300 g/s for all non-Niobium, 1200 g/s for Niobium). Dynamic preset row shows both when they differ.
 
 ### DOM / event conventions
 
-- All element lookups via `el(id)` = `document.getElementById`
-- Stepper buttons use `data-target` (input ID) and `data-delta` attributes — wired generically in `wireEvents`
-- Volcano buttons carry `data-rate` and a `--mat-clr` CSS variable for the active accent color
-- Dimension W × H ↔ tiles are kept in sync via `onDimChange` / `onTilesChange`; the `_lockDim` flag prevents recursion
-- Rate matching uses a `< 0.15` tolerance to snap to known volcano rates
+- All lookups via `el(id)` = `document.getElementById`
+- Stepper buttons: `data-target` (input ID) + `data-delta`, wired generically in `wireEvents`
+- Volcano buttons: `data-rate` + `--mat-clr` CSS variable
+- Dim W×H ↔ tiles synced via `onDimChange` / `onTilesChange` with `_lockDim` recursion guard
+- Rate matching: `< 0.15` tolerance to snap to known volcano rates
+- Dynamic presets built by `renderPresets(volcano)` on volcano select
 
 ### Assets
 
-Volcano PNG icons in `assets/images/`; each `.vol-btn` has an inline SVG sibling that shows on image load error.
+Volcano PNG icons in `assets/images/`; each `.vol-btn` has an inline SVG fallback on image load error.
