@@ -6,7 +6,7 @@
   <title>ONI Tools</title>
   <link rel="icon" href="assets/images/volcano.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@latest/index.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 <div class="app">
@@ -173,39 +173,11 @@
             <button class="step-btn right" data-target="rate" data-delta="50" aria-label="Increase rate by 50">+50</button>
           </div>
 
-          <div>
-            <span class="lbl">
-              On Time
-              <span style="color:var(--muted-foreground); font-size:10px; font-weight:400;">( 1 s = 20 kg package )</span>
-            </span>
-            <div class="step-wrap">
-              <button class="step-btn" data-target="on-time" data-delta="-1" aria-label="Decrease on-time by 1">−</button>
-              <input class="step-input sz-md" type="number" id="on-time" value="1" step="1" min="1" max="20" aria-label="On-time in seconds">
-              <div class="unit-tag" aria-hidden="true">
-                s &nbsp;→&nbsp; <span id="pkg-lbl" style="color:var(--chart-1)">20</span> kg
-              </div>
-              <button class="step-btn right" data-target="on-time" data-delta="1" aria-label="Increase on-time by 1">+</button>
-            </div>
-          </div>
         </div><!-- /timer-col -->
 
         <!-- Steam Room Inputs -->
         <div class="steam-col">
           <span class="lbl important teal-lbl">Steam Room</span>
-
-          <div>
-            <span class="lbl teal-lbl">kg per Tile (pressure)</span>
-            <div class="step-wrap teal highlight-teal">
-              <button class="step-btn" data-target="kg-tile" data-delta="-50" aria-label="Decrease kg per tile by 50">−50</button>
-              <button class="step-btn" data-target="kg-tile" data-delta="-10" aria-label="Decrease kg per tile by 10">−10</button>
-              <button class="step-btn" data-target="kg-tile" data-delta="-1" aria-label="Decrease kg per tile by 1">−1</button>
-              <input class="step-input sz-lg" type="number" id="kg-tile" value="50" step="1" min="1" aria-label="kg per tile">
-              <div class="unit-tag" aria-hidden="true">kg</div>
-              <button class="step-btn right" data-target="kg-tile" data-delta="1" aria-label="Increase kg per tile by 1">+1</button>
-              <button class="step-btn right" data-target="kg-tile" data-delta="10" aria-label="Increase kg per tile by 10">+10</button>
-              <button class="step-btn right" data-target="kg-tile" data-delta="50" aria-label="Increase kg per tile by 50">+50</button>
-            </div>
-          </div>
 
           <div>
             <span class="lbl teal-lbl">Room Dimensions</span>
@@ -261,35 +233,38 @@
     </div>
     <div class="result-body">
 
-      <!-- Timer Results -->
+      <!-- Volcano Card — col 1 -->
+      <div class="vol-result">
+        <div class="block-bar result-section-bar">
+          <div class="bar-accent orange" aria-hidden="true"></div>
+          <span class="bar-title">Volcano</span>
+        </div>
+        <div class="vol-card-standalone" aria-live="polite">
+          <img id="vol-card-img" src="" alt="" class="vol-card-icon" style="display:none">
+          <div class="vol-card-name" id="vol-card-name">—</div>
+          <div class="vol-card-rate" id="vol-card-rate"></div>
+        </div>
+      </div><!-- /vol-result -->
+
+      <!-- Timer Results — col 2 -->
       <div class="timer-result">
-        <!-- Volcano Card — parent container for all timer output -->
-        <div class="vol-card" id="vol-card">
-          <div class="vol-card-bar">
-            <div class="bar-accent orange" aria-hidden="true"></div>
-            <span class="vol-card-title">Timer — OFF / ON</span>
+        <div class="block-bar result-section-bar">
+          <div class="bar-accent orange" aria-hidden="true"></div>
+          <span class="bar-title">Timer — OFF / ON</span>
+        </div>
+        <div class="timer-main" aria-live="polite">
+          <div class="t-block">
+            <div class="t-lbl">Off Duration</div>
+            <div class="t-num off" id="r-off">—</div>
+            <div class="t-unit">seconds</div>
           </div>
-          <div class="vol-card-identity" aria-live="polite">
-            <img id="vol-card-img" src="" alt="" class="vol-card-icon" style="display:none">
-            <div class="vol-card-body">
-              <div class="vol-card-name" id="vol-card-name">—</div>
-              <div class="vol-card-rate" id="vol-card-rate"></div>
-            </div>
+          <div class="t-slash" aria-hidden="true">/</div>
+          <div class="t-block">
+            <div class="t-lbl">On Duration</div>
+            <div class="t-num on" id="r-on">—</div>
+            <div class="t-unit">seconds</div>
           </div>
-          <div class="timer-main" aria-live="polite">
-            <div class="t-block">
-              <div class="t-lbl">Off Duration</div>
-              <div class="t-num off" id="r-off">—</div>
-              <div class="t-unit">seconds</div>
-            </div>
-            <div class="t-slash" aria-hidden="true">/</div>
-            <div class="t-block">
-              <div class="t-lbl">On Duration</div>
-              <div class="t-num on" id="r-on">—</div>
-              <div class="t-unit">seconds</div>
-            </div>
-          </div>
-        </div><!-- /vol-card -->
+        </div>
         <div class="stat-row" aria-live="polite">
           <div class="stat-cell">
             <div class="s-lbl">Cycle</div>
@@ -325,7 +300,7 @@
         </div>
       </div><!-- /timer-result -->
 
-      <!-- Steam Results -->
+      <!-- Steam Results — col 3 -->
       <div class="steam-result">
         <div class="block-bar result-section-bar">
           <div class="bar-accent teal" aria-hidden="true"></div>
@@ -340,7 +315,7 @@
             <div class="t-lbl">Total Needed</div>
             <div class="t-num orange" id="sc-total">—</div>
             <div class="t-unit">
-              kg &nbsp;( <span id="sc-tiles-echo">—</span> × <span id="sc-kgt-echo">—</span> kg )
+              kg &nbsp;( <span id="sc-tiles-echo">—</span> × 50 kg )
             </div>
           </div>
           <div class="t-slash" aria-hidden="true">/</div>
@@ -357,7 +332,6 @@
               <button class="plate-nudge-btn" data-delta="1"  aria-label="Add one plate">+1 plate</button>
             </div>
           </div>
-
           <div class="plate-grid" id="plate-grid">
             <div class="plate-cell" id="pc-total-mass">
               <div class="pc-label">Plates × 800 kg</div>
@@ -380,6 +354,6 @@
 
 </div><!-- /app -->
 
-<script src="main.js?v=4"></script>
+<script src="main.js?v=5"></script>
 </body>
 </html>

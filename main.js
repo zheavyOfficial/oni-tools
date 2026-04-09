@@ -129,10 +129,9 @@
 
   function calcTimer() {
     const rate   = getN('rate');
-    const onTime = Math.max(1, Math.round(getN('on-time')));
+    const onTime = 1;
 
     const pkg = onTime * PKG_PER_ON;
-    setText('pkg-lbl', pkg);
 
     if (rate <= 0) return;
 
@@ -164,8 +163,8 @@
 
   function calcSteam() {
     const tiles  = getN('tiles');
-    const kgTile = getN('kg-tile');
-    if (tiles <= 0 || kgTile <= 0) return;
+    const kgTile = 50;
+    if (tiles <= 0) return;
 
     _steamTotal  = tiles * kgTile;
     _basePlates  = Math.ceil(_steamTotal / PLATE_KG);
@@ -186,7 +185,6 @@
     const sign     = diff >= 0 ? '+' : '';
 
     setText('sc-tiles-echo', getN('tiles'));
-    setText('sc-kgt-echo',   getN('kg-tile'));
     setText('sc-total',   _steamTotal.toLocaleString());
     setText('sc-plates',  plates);
     setText('sc-exact',   `(${exact.toFixed(2)} exact)`);
@@ -249,8 +247,6 @@
 
     // Input change handlers
     el('rate').addEventListener('input', onRateChange);
-    el('on-time').addEventListener('input', recalc);
-    el('kg-tile').addEventListener('input', recalc);
     el('dim-w').addEventListener('input', onDimChange);
     el('dim-h').addEventListener('input', onDimChange);
     el('tiles').addEventListener('input', onTilesChange);
