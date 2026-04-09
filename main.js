@@ -286,6 +286,15 @@
   // ════════════════════════════════════════
   function init() {
     wireEvents();
+
+    // Default to Copper (rate 300 g/s matches the default rate input value)
+    const defaultBtn = document.querySelector('.vol-btn[data-vol="Copper"]');
+    if (defaultBtn) {
+      defaultBtn.classList.add('active');
+      defaultBtn.setAttribute('aria-checked', 'true');
+      updateVolBadge('Copper');
+    }
+
     recalc();
   }
 
