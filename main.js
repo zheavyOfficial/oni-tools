@@ -67,28 +67,31 @@
     btn.setAttribute('aria-checked', 'true');
 
     const volName = btn.dataset.vol;
-    updateVolBadge(volName);
+    updateVolDisplay(volName);
   }
 
-  function updateVolBadge(name) {
-    const volcano = VOLCANOES.find(v => v.name === name);
-    const badgeName = el('vol-badge-name');
-    const badgeImg  = el('vol-badge-img');
-    const barTag    = el('bar-vol-tag');
+  function updateVolDisplay(name) {
+    const volcano  = VOLCANOES.find(v => v.name === name);
+    const infoRate = el('vol-info-rate');
+    const cardImg  = el('vol-card-img');
+    const cardName = el('vol-card-name');
+    const cardRate = el('vol-card-rate');
 
     if (volcano) {
-      badgeName.textContent = volcano.name + ' Volcano';
+      infoRate.textContent = volcano.rate + ' g/s';
       const imgSrc = 'assets/images/' + volcano.name.toLowerCase() + '_volcano.png';
-      badgeImg.src = imgSrc;
-      badgeImg.alt = volcano.name;
-      badgeImg.style.display = '';
-      badgeImg.onerror = function () { badgeImg.style.display = 'none'; };
-      barTag.textContent = '· ' + volcano.name + ' Volcano';
+      cardImg.src  = imgSrc;
+      cardImg.alt  = volcano.name;
+      cardImg.style.display = '';
+      cardImg.onerror = function () { cardImg.style.display = 'none'; };
+      cardName.textContent = volcano.name + ' Volcano';
+      cardRate.textContent = volcano.rate + ' g/s reference output';
     } else {
-      badgeName.textContent = 'No volcano selected';
-      badgeImg.style.display = 'none';
-      badgeImg.src = '';
-      barTag.textContent = '';
+      infoRate.textContent = '— g/s';
+      cardImg.style.display = 'none';
+      cardImg.src  = '';
+      cardName.textContent = '—';
+      cardRate.textContent = '';
     }
   }
 
@@ -287,12 +290,12 @@
   function init() {
     wireEvents();
 
-    // Default to Copper (rate 300 g/s matches the default rate input value)
-    const defaultBtn = document.querySelector('.vol-btn[data-vol="Copper"]');
+    // Default to Gold Volcano
+    const defaultBtn = document.querySelector('.vol-btn[data-vol="Gold"]');
     if (defaultBtn) {
       defaultBtn.classList.add('active');
       defaultBtn.setAttribute('aria-checked', 'true');
-      updateVolBadge('Copper');
+      updateVolDisplay('Gold');
     }
 
     recalc();

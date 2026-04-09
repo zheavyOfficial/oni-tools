@@ -163,10 +163,10 @@
         <div class="timer-col">
           <span class="lbl important">Production Rate</span>
 
-          <!-- Volcano badge (updated by JS when a volcano is selected) -->
-          <div class="vol-badge" id="vol-badge" aria-live="polite">
-            <img id="vol-badge-img" src="" alt="" class="vol-badge-icon" style="display:none">
-            <span id="vol-badge-name">No volcano selected</span>
+          <!-- Volcano output info (reference rate for selected volcano) -->
+          <div class="vol-info" id="vol-info" aria-live="polite">
+            <span class="vol-info-label">Volcano Output</span>
+            <span class="vol-info-rate" id="vol-info-rate">— g/s</span>
           </div>
 
           <div class="step-wrap highlight" id="rate-wrap">
@@ -273,8 +273,16 @@
         <div class="block-bar result-section-bar">
           <div class="bar-accent orange" aria-hidden="true"></div>
           <span class="bar-title">Timer — OFF / ON</span>
-          <span class="bar-vol-tag" id="bar-vol-tag"></span>
         </div>
+        <!-- Large volcano card -->
+        <div class="vol-card" id="vol-card" aria-live="polite">
+          <img id="vol-card-img" src="" alt="" class="vol-card-icon" style="display:none">
+          <div class="vol-card-body">
+            <div class="vol-card-name" id="vol-card-name">—</div>
+            <div class="vol-card-rate" id="vol-card-rate"></div>
+          </div>
+        </div>
+
         <div class="timer-main" aria-live="polite">
           <div class="t-block">
             <div class="t-lbl">Off Duration</div>
