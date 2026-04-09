@@ -1,25 +1,15 @@
 {
   "name": "oni-tools",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-"scripts": {
-  "dev": "http-server . -o -p 3000 -a localhost",
-  "build": "echo \"No build step needed for static site\"",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+  "description": "ONI fan calculators — static site",
+  "scripts": {
+    "dev": "http-server . -o -p 3000 -a localhost"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zheavyOfficial/oni-tools.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/zheavyOfficial/oni-tools/issues"
-  },
-  "homepage": "https://github.com/zheavyOfficial/oni-tools#readme",
   "devDependencies": {
     "http-server": "^14.1.1"
   }

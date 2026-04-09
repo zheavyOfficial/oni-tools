@@ -21,11 +21,11 @@ Static site — HTML + CSS + JS, no build step. Only dep: `http-server`.
 
 ## Key logic
 
-**Timer** (`calcTimer`): `off = round((rate * on_time * 1000 / rate) - on_time)` — `PKG_PER_ON = 20` kg/s  
+**Timer** (`calcTimer`): `off = round((pkg_g / rate) - on_time)` — `PKG_PER_ON = 20` kg/s  
 **Steam** (`calcSteam`): ice tempshift plates at `PLATE_KG = 800` kg each, nudgeable via `_plateOffset`
 
-**Volcano buttons** — label-only selector. Clicking updates `updateVolDisplay(name)` (badge + vol-card), does NOT touch the rate input or recalc.  
-`VOLCANOES` array: `{ name, rate, color }` — rate is reference only.
+**Volcano buttons** — label-only selector. Clicking updates `updateVolDisplay(name)` (vol-card icon + name). Does NOT touch rate input.  
+`VOLCANOES` array: `{ name, color }` — no rate stored.
 
 ## Conventions
 
