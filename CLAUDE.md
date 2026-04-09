@@ -10,6 +10,20 @@ npm run dev   # serves on http://localhost:3000 with auto-open
 
 No build step — this is a static site (HTML + CSS + JS).
 
+## Git Workflow
+
+After completing any meaningful unit of work, commit and push to GitHub:
+
+```bash
+git add <files>
+git commit -m "type: short description"
+git push
+```
+
+- Commit after each logical change (feature, fix, refactor) — don't batch unrelated work
+- Use conventional commit prefixes: `feat:`, `fix:`, `chore:`, `refactor:`, `style:`
+- Push after every commit so work is never lost locally
+
 ## Architecture
 
 Single-page tool with three files:
