@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Metal Volcano Tamer</title>
+  <title>ONI Tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -14,28 +14,34 @@
   <!-- ══ HEADER ══ -->
   <header class="hdr">
     <svg class="hdr-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="4" y="43" width="40" height="4" fill="#120e04"/>
-      <polygon points="2,46 24,5 46,46" fill="#221408" stroke="#5a3010" stroke-width="1.5" stroke-linejoin="miter"/>
-      <polygon points="10,46 24,20 38,46" fill="#321a0c" stroke="#4a2a10" stroke-width="1"/>
-      <path d="M17,46 L15,36 L19,28 L17,22" fill="none" stroke="#e8820a" stroke-width="2.5" stroke-linecap="square"/>
-      <path d="M30,46 L32,34 L28,26" fill="none" stroke="#a04808" stroke-width="2" stroke-linecap="square"/>
-      <rect x="19" y="5" width="10" height="7" fill="#e8820a" opacity="0.9"/>
-      <rect x="21" y="4" width="6" height="5" fill="#f4a030"/>
-      <rect x="22" y="2" width="4" height="3" fill="#f4c050" opacity="0.8"/>
-      <rect x="15" y="1" width="3" height="3" fill="#f4c060" opacity="0.9"/>
-      <rect x="30" y="0" width="2" height="2" fill="#f09030" opacity="0.8"/>
+      <polygon points="2,46 24,5 46,46" fill="#1c2128" stroke="#444c56" stroke-width="1.5" stroke-linejoin="miter"/>
+      <polygon points="10,46 24,20 38,46" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+      <path d="M17,46 L15,36 L19,28 L17,22" fill="none" stroke="#f0883e" stroke-width="2.5" stroke-linecap="square"/>
+      <path d="M30,46 L32,34 L28,26" fill="none" stroke="#b35900" stroke-width="2" stroke-linecap="square"/>
+      <rect x="19" y="5" width="10" height="7" fill="#f0883e" opacity="0.9"/>
+      <rect x="21" y="4" width="6" height="5" fill="#ffa657"/>
+      <rect x="22" y="2" width="4" height="3" fill="#ffd580" opacity="0.8"/>
+      <rect x="15" y="1" width="3" height="3" fill="#ffd580" opacity="0.9"/>
+      <rect x="30" y="0" width="2" height="2" fill="#ffa657" opacity="0.8"/>
     </svg>
     <div>
-      <h1>Metal Volcano Tamer</h1>
-      <p class="sub">Timer Sensor + Steam Room Calculator</p>
+      <h1>ONI Tools</h1>
+      <p class="sub">Oxygen Not Included — Fan Calculators</p>
     </div>
   </header>
+
+  <!-- ══ TAB BAR ══ -->
+  <nav class="tab-bar" role="tablist" aria-label="Tools">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="volcano-timer">
+      Volcano Timer
+    </button>
+  </nav>
   <div class="hdr-rule" aria-hidden="true"></div>
 
   <!-- ══ INPUT BLOCK ══ -->
   <section class="block" aria-label="Inputs">
     <div class="block-bar">
-      <div class="bar-pip orange" aria-hidden="true"></div>
+      <div class="bar-accent orange" aria-hidden="true"></div>
       <span class="bar-title">Inputs</span>
     </div>
     <div class="input-body">
@@ -50,13 +56,12 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/gold_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#1e1a08" stroke="#6a5010" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#2e2410"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#e8c020" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#e8c020" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#c8a010" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#e8c020" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#f8d840"/>
-                <rect x="7" y="0" width="2" height="2" fill="#ffe860" opacity="0.8"/>
               </svg>
             </div>
             <div>
@@ -70,13 +75,12 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/copper_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#1e1410" stroke="#6a3820" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#2e1e14"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#d4784a" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#d4784a" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#b05830" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#d4784a" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#e89060"/>
-                <rect x="7" y="0" width="2" height="2" fill="#f4a870" opacity="0.8"/>
               </svg>
             </div>
             <div>
@@ -90,13 +94,12 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/iron_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#1e1610" stroke="#5a4040" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#2e2020"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#a8a0a0" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#a8a0a0" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#888080" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#a8a0a0" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#c8c0c0"/>
-                <rect x="7" y="0" width="2" height="2" fill="#e0d8d8" opacity="0.8"/>
               </svg>
             </div>
             <div>
@@ -110,13 +113,12 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/cobalt_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#101420" stroke="#283868" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#181c30"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#4878d8" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#4878d8" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#3058b0" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#4878d8" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#6898e8"/>
-                <rect x="7" y="0" width="2" height="2" fill="#88b8f8" opacity="0.8"/>
               </svg>
             </div>
             <div>
@@ -130,13 +132,12 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/aluminium_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#181c20" stroke="#506070" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#222830"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#c0d8e8" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c0d8e8" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#98b8cc" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#c0d8e8" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#d8ecf8"/>
-                <rect x="7" y="0" width="2" height="2" fill="#ecf8ff" opacity="0.8"/>
               </svg>
             </div>
             <div>
@@ -150,18 +151,17 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/niobium_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#1a1220" stroke="#604878" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#261830"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#d0a8e0" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#d0a8e0" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#a878c0" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#d0a8e0" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#e0c0f0"/>
-                <rect x="7" y="0" width="2" height="2" fill="#f0d8ff" opacity="0.8"/>
               </svg>
             </div>
             <div>
               <div class="vol-name">Niobium</div>
-              <div class="vol-rate">~1200 g/s</div>
+              <div class="vol-rate">1200 g/s</div>
             </div>
           </button>
 
@@ -170,13 +170,12 @@
             <div class="vol-icon-wrap" aria-hidden="true">
               <img src="assets/images/tungsten_volcano.png" alt="">
               <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="1,21 11,2 21,21" fill="#1c1a14" stroke="#605840" stroke-width="1" stroke-linejoin="miter"/>
-                <polygon points="5,21 11,10 17,21" fill="#28261a"/>
+                <polygon points="1,21 11,2 21,21" fill="#1c2128" stroke="#c8b890" stroke-width="0.8"/>
+                <polygon points="5,21 11,10 17,21" fill="#21262d"/>
                 <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c8b890" stroke-width="1.5" stroke-linecap="square"/>
                 <path d="M14,21 L15,15 L13,11" fill="none" stroke="#a89870" stroke-width="1.2" stroke-linecap="square"/>
                 <rect x="8" y="1" width="6" height="4" fill="#c8b890" opacity="0.9"/>
                 <rect x="9" y="0" width="4" height="3" fill="#e0d0a8"/>
-                <rect x="7" y="0" width="2" height="2" fill="#f0e8c0" opacity="0.8"/>
               </svg>
             </div>
             <div>
@@ -193,15 +192,10 @@
 
         <!-- Production Rate / Timer Inputs -->
         <div class="timer-col">
-          <span class="lbl important">⬤ Production Rate</span>
+          <span class="lbl important">Production Rate</span>
 
-          <div class="preset-row" role="group" aria-label="Rate presets">
-            <button class="prs-btn" data-val="200">200</button>
-            <button class="prs-btn" data-val="250">250</button>
-            <button class="prs-btn" data-val="300">300</button>
-            <button class="prs-btn" data-val="350">350</button>
-            <button class="prs-btn" data-val="400">400</button>
-          </div>
+          <!-- Dynamic preset row — populated by JS on volcano select -->
+          <div class="preset-row" id="preset-row" role="group" aria-label="Rate presets"></div>
 
           <div class="step-wrap highlight" id="rate-wrap">
             <button class="step-btn" data-target="rate" data-delta="-50" aria-label="Decrease rate by 50">−50</button>
@@ -217,7 +211,7 @@
           <div>
             <span class="lbl">
               On Time
-              <span style="color:var(--tan); font-size:10px;">( 1 on = 20 kg package )</span>
+              <span style="color:var(--text-muted); font-size:10px; font-weight:400;">( 1 s = 20 kg package )</span>
             </span>
             <div class="step-wrap">
               <button class="step-btn" data-target="on-time" data-delta="-1" aria-label="Decrease on-time by 1">−</button>
@@ -232,11 +226,11 @@
 
         <!-- Steam Room Inputs -->
         <div class="steam-col">
-          <span class="lbl important" style="color:var(--blue-lt)">⬤ Steam Room</span>
+          <span class="lbl important teal-lbl">Steam Room</span>
 
           <div>
-            <span class="lbl blue-lbl">kg per Tile (pressure)</span>
-            <div class="step-wrap blue highlight-blue">
+            <span class="lbl teal-lbl">kg per Tile (pressure)</span>
+            <div class="step-wrap teal highlight-teal">
               <button class="step-btn" data-target="kg-tile" data-delta="-10" aria-label="Decrease kg per tile by 10">−10</button>
               <button class="step-btn" data-target="kg-tile" data-delta="-5" aria-label="Decrease kg per tile by 5">−5</button>
               <input class="step-input sz-lg" type="number" id="kg-tile" value="50" step="1" min="1" aria-label="kg per tile">
@@ -247,11 +241,11 @@
           </div>
 
           <div>
-            <span class="lbl blue-lbl">Room Dimensions</span>
+            <span class="lbl teal-lbl">Room Dimensions</span>
             <div class="wh-row">
               <div>
                 <span class="lbl small">Width</span>
-                <div class="step-wrap blue">
+                <div class="step-wrap teal">
                   <button class="step-btn" data-target="dim-w" data-delta="-1" aria-label="Decrease width">−</button>
                   <input class="step-input sz-md" type="number" id="dim-w" value="4" step="1" min="1" aria-label="Room width in tiles">
                   <div class="unit-tag" aria-hidden="true">W</div>
@@ -261,7 +255,7 @@
               <div class="wh-x" aria-hidden="true">×</div>
               <div>
                 <span class="lbl small">Height</span>
-                <div class="step-wrap blue">
+                <div class="step-wrap teal">
                   <button class="step-btn" data-target="dim-h" data-delta="-1" aria-label="Decrease height">−</button>
                   <input class="step-input sz-md" type="number" id="dim-h" value="16" step="1" min="1" aria-label="Room height in tiles">
                   <div class="unit-tag" aria-hidden="true">H</div>
@@ -272,8 +266,8 @@
           </div>
 
           <div>
-            <span class="lbl blue-lbl">Total Tiles</span>
-            <div class="step-wrap blue">
+            <span class="lbl teal-lbl">Total Tiles</span>
+            <div class="step-wrap teal">
               <button class="step-btn" data-target="tiles" data-delta="-4" aria-label="Decrease tiles by 4">−4</button>
               <button class="step-btn" data-target="tiles" data-delta="-1" aria-label="Decrease tiles by 1">−1</button>
               <input class="step-input sz-md" type="number" id="tiles" value="64" step="1" min="1" aria-label="Total tiles">
@@ -288,12 +282,12 @@
       </div><!-- /inputs-flex -->
 
     </div><!-- /input-body -->
-  </section><!-- /input block -->
+  </section>
 
   <!-- ══ RESULT BLOCK ══ -->
   <section class="block" aria-label="Results">
     <div class="block-bar">
-      <div class="bar-pip green" aria-hidden="true"></div>
+      <div class="bar-accent green" aria-hidden="true"></div>
       <span class="bar-title">Results</span>
     </div>
     <div class="result-body">
@@ -301,7 +295,7 @@
       <!-- Timer Results -->
       <div class="timer-result">
         <div class="block-bar result-section-bar">
-          <div class="bar-pip orange" aria-hidden="true"></div>
+          <div class="bar-accent orange" aria-hidden="true"></div>
           <span class="bar-title">Timer — OFF / ON</span>
         </div>
 
@@ -360,7 +354,7 @@
       <!-- Steam Results -->
       <div class="steam-result">
         <div class="block-bar result-section-bar">
-          <div class="bar-pip blue" aria-hidden="true"></div>
+          <div class="bar-accent teal" aria-hidden="true"></div>
           <img src="assets/images/tempshift_plate.png"
                alt=""
                class="tempshift-icon"
@@ -368,7 +362,6 @@
           <span class="bar-title">Steam Room — Ice Tempshift Plates</span>
         </div>
 
-        <!-- Big number display — mirrors timer-main layout -->
         <div class="timer-main" aria-live="polite">
           <div class="t-block">
             <div class="t-lbl">Total Needed</div>
@@ -385,17 +378,14 @@
           </div>
         </div>
 
-        <!-- Plate nudge + breakdown -->
         <div class="steam-card" aria-live="polite">
-
           <div class="ice-plates-row">
-            <div class="plate-nudge" style="justify-content:center; width:100%;">
+            <div class="plate-nudge">
               <button class="plate-nudge-btn" data-delta="-1" aria-label="Remove one plate">−1 plate</button>
               <button class="plate-nudge-btn" data-delta="1"  aria-label="Add one plate">+1 plate</button>
             </div>
           </div>
 
-          <!-- Plate breakdown -->
           <div class="plate-grid" id="plate-grid">
             <div class="plate-cell" id="pc-total-mass">
               <div class="pc-label">Plates × 800 kg</div>
@@ -408,14 +398,13 @@
               <div class="pc-sub"   id="pc-delta-sub">—</div>
             </div>
           </div>
-
         </div><!-- /steam-card -->
       </div><!-- /steam-result -->
 
     </div><!-- /result-body -->
-  </section><!-- /result block -->
+  </section>
 
-  <footer>Metal Volcano Tamer — ONI Fan Tool — Not affiliated with Klei Entertainment</footer>
+  <footer>ONI Tools — Fan Tool — Not affiliated with Klei Entertainment</footer>
 
 </div><!-- /app -->
 
