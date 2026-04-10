@@ -244,13 +244,12 @@ body {
   line-height: 1.4;
 }
 
-/* Dormancy row */
-.dormancy-row {
+/* Dormancy header — label + toggle on same line */
+.dormancy-hdr {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
 }
-.dormancy-row .step-wrap { flex: 1; min-width: 0; }
 
 .dormant-btn {
   background: var(--secondary);
@@ -258,10 +257,10 @@ body {
   border-radius: var(--radius);
   color: var(--muted-foreground);
   font-family: inherit;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 0 14px;
-  height: 44px;
+  padding: 4px 10px;
+  height: auto;
   cursor: pointer;
   transition: all 0.12s;
   white-space: nowrap;

@@ -93,20 +93,17 @@
   // ════════════════════════════════════════
   function toggleDormant() {
     _isDormant = !_isDormant;
-    const btn  = el('dormant-btn');
-    const wrap = el('dormancy-wrap');
+    const btn   = el('dormant-btn');
+    const label = el('dormancy-label');
     btn.setAttribute('aria-pressed', _isDormant.toString());
     btn.classList.toggle('active', _isDormant);
-    wrap.style.opacity       = _isDormant ? '0.35' : '';
-    wrap.style.pointerEvents = _isDormant ? 'none' : '';
-    recalc();
+    label.textContent = _isDormant ? 'Next Active' : 'Next Dormancy';
   }
 
   // ════════════════════════════════════════
   //  AVG OUTPUT CALCULATION
   // ════════════════════════════════════════
   function calcAvgOutput() {
-    if (_isDormant) return 0;
     const rate        = getN('rate');
     const eruptTime   = getN('erupt-time');
     const eruptPeriod = getN('erupt-period');
@@ -146,15 +143,8 @@
   // ════════════════════════════════════════
   function recalc() {
     const avg = calcAvgOutput();
-
-    if (_isDormant) {
-      setText('avg-output-val', 'Dormant');
-      setText('vol-card-rate',  'Currently dormant');
-    } else {
-      setText('avg-output-val', avg.toFixed(2) + ' g/s');
-      setText('vol-card-rate',  avg.toFixed(2) + ' g/s avg');
-    }
-
+    setText('avg-output-val', avg.toFixed(2) + ' g/s');
+    setText('vol-card-rate',  avg.toFixed(2) + ' g/s avg');
     calcTimer();
     calcSteam();
   }
