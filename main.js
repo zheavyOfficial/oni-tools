@@ -12,13 +12,15 @@
   const PLATE_KG   = 800;  // kg of cooling per ice tempshift plate
 
   const VOLCANOES = [
-    { name: 'Gold',      color: '#e8c020' },
-    { name: 'Copper',    color: '#d4784a' },
-    { name: 'Iron',      color: '#a8a0a0' },
-    { name: 'Cobalt',    color: '#4878d8' },
-    { name: 'Aluminium', color: '#c0d8e8' },
-    { name: 'Niobium',   color: '#d0a8e0' },
-    { name: 'Tungsten',  color: '#c8b890' },
+    { name: 'Gold',        color: '#e8c020' },
+    { name: 'Copper',      color: '#d4784a' },
+    { name: 'Iron',        color: '#a8a0a0' },
+    { name: 'Cobalt',      color: '#4878d8' },
+    { name: 'Aluminium',   color: '#c0d8e8' },
+    { name: 'Niobium',     color: '#d0a8e0' },
+    { name: 'Tungsten',    color: '#c8b890' },
+    { name: 'Magma',       color: '#e85030' },
+    { name: 'Minor Magma', color: '#c84828' },
   ];
 
   // ════════════════════════════════════════
@@ -29,6 +31,7 @@
   let _plateOffset = 0;
   let _lockDim     = false;
   let _isDormant   = false;
+  let _rateInKg    = true;   // default unit is kg/s
 
   // ════════════════════════════════════════
   //  DOM HELPERS
@@ -75,7 +78,7 @@
     const cardName = el('vol-card-name');
 
     if (volcano) {
-      const imgSrc = 'assets/images/' + volcano.name.toLowerCase() + '_volcano.png';
+      const imgSrc = 'assets/images/' + volcano.name.toLowerCase().replace(/ /g, '_') + '_volcano.png';
       cardImg.src  = imgSrc;
       cardImg.alt  = volcano.name;
       cardImg.style.display = '';
@@ -101,10 +104,31 @@
   }
 
   // ════════════════════════════════════════
+  //  RATE UNIT TOGGLE (kg/s ↔ g/s)
+  // ════════════════════════════════════════
+  function getRateGrams() {
+    const raw = getN('rate');
+    return _rateInKg ? raw * 1000 : raw;
+  }
+
+  function toggleRateUnit() {
+    const raw = getN('rate');
+    _rateInKg = !_rateInKg;
+    const label = _rateInKg ? 'kg/s' : 'g/s';
+    el('rate-unit-btn').textContent = label;
+    el('rate-unit-tag').textContent = label;
+    // Convert the current value to the new unit
+    el('rate').value = _rateInKg ? (raw / 1000).toPrecision(6).replace(/\.?0+$/, '') : (raw * 1000);
+    el('rate').step  = _rateInKg ? '0.1' : '1';
+    el('rate').min   = _rateInKg ? '0.001' : '0.1';
+    recalc();
+  }
+
+  // ════════════════════════════════════════
   //  AVG OUTPUT CALCULATION
   // ════════════════════════════════════════
   function calcAvgOutput() {
-    const rate        = getN('rate');
+    const rate        = getRateGrams(); // always in g/s
     const eruptTime   = getN('erupt-time');
     const eruptPeriod = getN('erupt-period');
     const activeCy    = getN('active-cycles');
@@ -150,7 +174,7 @@
   }
 
   function calcTimer() {
-    const rate   = getN('rate');
+    const rate   = getRateGrams(); // always g/s internally
     const onTime = 1;
     const pkg    = onTime * PKG_PER_ON;
 
@@ -263,6 +287,7 @@
     );
 
     el('dormant-btn').addEventListener('click', toggleDormant);
+    el('rate-unit-btn').addEventListener('click', toggleRateUnit);
 
     ['rate', 'erupt-time', 'erupt-period', 'active-cycles', 'total-cycles', 'kg-tile']
       .forEach(id => el(id).addEventListener('input', recalc));

@@ -244,6 +244,31 @@ body {
   line-height: 1.4;
 }
 
+/* Rate header — label + unit toggle on same line */
+.rate-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.unit-toggle {
+  background: var(--secondary);
+  border: 1px solid var(--chart-2);
+  border-radius: var(--radius);
+  color: var(--chart-1);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: all 0.12s;
+  letter-spacing: 0.3px;
+}
+.unit-toggle:hover {
+  background: oklch(0.705 0.213 47.604 / 12%);
+  border-color: var(--chart-1);
+}
+
 /* Dormancy header — label + toggle on same line */
 .dormancy-hdr {
   display: flex;

@@ -6,7 +6,7 @@
   <title>ONI Tools</title>
   <link rel="icon" href="assets/images/volcano.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@latest/index.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 <div class="app">
@@ -140,17 +140,46 @@
                 <span class="vol-name">Tung.</span>
               </button>
 
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Magma" style="--mat-clr:#e85030">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/magma_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#e85030" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#e85030" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#e85030" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Magma</span>
+              </button>
+
+              <button class="vol-btn" role="radio" aria-checked="false" data-vol="Minor Magma" style="--mat-clr:#c84828">
+                <div class="vol-icon-wrap" aria-hidden="true">
+                  <img src="assets/images/minor_magma_volcano.png" alt="">
+                  <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#c84828" stroke-width="0.8"/>
+                    <polygon points="5,21 11,10 17,21" fill="#333"/>
+                    <path d="M8,21 L7,16 L9,12 L8,10" fill="none" stroke="#c84828" stroke-width="1.5" stroke-linecap="square"/>
+                    <rect x="8" y="1" width="6" height="4" fill="#c84828" opacity="0.9"/>
+                  </svg>
+                </div>
+                <span class="vol-name">Minor</span>
+              </button>
+
             </div><!-- /vol-grid -->
           </div><!-- /sb-group type -->
 
           <!-- Eruption Rate -->
           <div class="sb-group">
-            <span class="sb-lbl">Eruption Rate</span>
+            <div class="rate-hdr">
+              <span class="sb-lbl">Eruption Rate</span>
+              <button class="unit-toggle" id="rate-unit-btn" aria-label="Toggle rate unit">kg/s</button>
+            </div>
             <div class="step-wrap highlight" id="rate-wrap">
               <button class="step-btn" data-target="rate" data-delta="-10" aria-label="−10">−10</button>
               <button class="step-btn" data-target="rate" data-delta="-1"  aria-label="−1">−1</button>
-              <input class="step-input sz-md" type="number" id="rate" value="300" step="0.1" min="0.1" aria-label="Eruption rate in g/s">
-              <div class="unit-tag" aria-hidden="true">g/s</div>
+              <input class="step-input sz-md" type="number" id="rate" value="0.3" step="0.1" min="0.001" aria-label="Eruption rate">
+              <div class="unit-tag" id="rate-unit-tag" aria-hidden="true">kg/s</div>
               <button class="step-btn right" data-target="rate" data-delta="1"  aria-label="+1">+1</button>
               <button class="step-btn right" data-target="rate" data-delta="10" aria-label="+10">+10</button>
             </div>
@@ -418,6 +447,6 @@
 
 </div><!-- /app -->
 
-<script src="main.js?v=8"></script>
+<script src="main.js?v=9"></script>
 </body>
 </html>
