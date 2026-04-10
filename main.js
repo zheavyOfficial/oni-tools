@@ -8,8 +8,9 @@
   // ════════════════════════════════════════
   //  CONSTANTS
   // ════════════════════════════════════════
-  const PKG_PER_ON = 20;   // kg produced per 1 second of on-time (fixed game mechanic)
-  const PLATE_KG   = 800;  // kg of cooling per ice tempshift plate
+  const PKG_PER_ON    = 20;    // kg produced per 1 second of on-time (fixed game mechanic)
+  const PLATE_KG      = 800;   // kg of cooling per ice tempshift plate
+  const CYCLE_SECONDS = 600;   // 1 game cycle = 600 seconds
 
   const VOLCANOES = [
     { name: 'Gold',        color: '#e8c020' },
@@ -30,8 +31,9 @@
   let _basePlates  = 0;
   let _plateOffset = 0;
   let _lockDim     = false;
-  let _isDormant   = false;
-  let _rateInKg    = true;   // default unit is kg/s
+  let _rateInKg    = true;    // eruption rate unit: kg/s or g/s
+  let _isOverride  = true;    // override mode: directly input avg output
+  let _detailOpen  = false;   // eruption params collapsible state
 
   // ════════════════════════════════════════
   //  DOM HELPERS
@@ -92,15 +94,38 @@
   }
 
   // ════════════════════════════════════════
-  //  DORMANT TOGGLE
+  //  OVERRIDE TOGGLE + DETAIL COLLAPSIBLE
   // ════════════════════════════════════════
-  function toggleDormant() {
-    _isDormant = !_isDormant;
-    const btn   = el('dormant-btn');
-    const label = el('dormancy-label');
-    btn.setAttribute('aria-pressed', _isDormant.toString());
-    btn.classList.toggle('active', _isDormant);
-    label.textContent = _isDormant ? 'Next Active' : 'Next Dormancy';
+  function applyOverrideVisuals() {
+    const btn = el('override-btn');
+    btn.setAttribute('aria-pressed', _isOverride.toString());
+    btn.classList.toggle('active', _isOverride);
+
+    el('avg-output-val').style.display     = _isOverride ? 'none' : '';
+    el('avg-override-wrap').style.display   = _isOverride ? '' : 'none';
+
+    // Show collapsible eruption params only when override is OFF
+    el('override-detail').style.display = _isOverride ? 'none' : '';
+  }
+
+  function toggleOverride() {
+    _isOverride = !_isOverride;
+    // Auto-open eruption params when switching to calculated mode
+    if (!_isOverride && !_detailOpen) {
+      _detailOpen = true;
+      el('detail-body').style.display = '';
+      el('detail-toggle').setAttribute('aria-expanded', 'true');
+      el('detail-toggle').querySelector('.detail-toggle-icon').textContent = '\u25BC';
+    }
+    applyOverrideVisuals();
+    recalc();
+  }
+
+  function toggleDetail() {
+    _detailOpen = !_detailOpen;
+    el('detail-body').style.display = _detailOpen ? '' : 'none';
+    el('detail-toggle').setAttribute('aria-expanded', _detailOpen.toString());
+    el('detail-toggle').querySelector('.detail-toggle-icon').textContent = _detailOpen ? '\u25BC' : '\u25B6';
   }
 
   // ════════════════════════════════════════
@@ -117,7 +142,6 @@
     const label = _rateInKg ? 'kg/s' : 'g/s';
     el('rate-unit-btn').textContent = label;
     el('rate-unit-tag').textContent = label;
-    // Convert the current value to the new unit
     el('rate').value = _rateInKg ? (raw / 1000).toPrecision(6).replace(/\.?0+$/, '') : (raw * 1000);
     el('rate').step  = _rateInKg ? '0.1' : '1';
     el('rate').min   = _rateInKg ? '0.001' : '0.1';
@@ -125,18 +149,22 @@
   }
 
   // ════════════════════════════════════════
-  //  AVG OUTPUT CALCULATION
+  //  AVG OUTPUT — calculated or overridden
   // ════════════════════════════════════════
   function calcAvgOutput() {
-    const rate        = getRateGrams(); // always in g/s
+    const rate        = getRateGrams();
     const eruptTime   = getN('erupt-time');
     const eruptPeriod = getN('erupt-period');
-    const activeCy    = getN('active-cycles');
-    const totalCy     = getN('total-cycles');
-    if (eruptPeriod <= 0 || totalCy <= 0) return 0;
+    if (eruptPeriod <= 0) return 0;
     const eruptRatio  = Math.min(eruptTime / eruptPeriod, 1);
-    const activeRatio = Math.min(activeCy  / totalCy,     1);
-    return rate * eruptRatio * activeRatio;
+    return rate * eruptRatio;
+  }
+
+  function getEffectiveRate() {
+    if (_isOverride) {
+      return getN('avg-override');
+    }
+    return calcAvgOutput();
   }
 
   // ════════════════════════════════════════
@@ -166,43 +194,51 @@
   //  MAIN RECALC
   // ════════════════════════════════════════
   function recalc() {
-    const avg = calcAvgOutput();
-    setText('avg-output-val', avg.toFixed(2) + ' g/s');
-    setText('vol-card-rate',  avg.toFixed(2) + ' g/s avg');
-    calcTimer();
+    const avg = getEffectiveRate(); // g/s
+
+    if (!_isOverride) {
+      setText('avg-output-val', avg.toFixed(2) + ' g/s');
+    }
+    setText('vol-card-rate', avg.toFixed(2) + ' g/s avg');
+
+    calcTimer(avg);
     calcSteam();
   }
 
-  function calcTimer() {
-    const rate   = getRateGrams(); // always g/s internally
+  function calcTimer(rateGs) {
     const onTime = 1;
     const pkg    = onTime * PKG_PER_ON;
 
-    if (rate <= 0) return;
+    if (rateGs <= 0) return;
 
-    const pkgG     = pkg * 1000;              // grams
-    const exact    = (pkgG / rate) - onTime;
+    const pkgG     = pkg * 1000;                // grams
+    const exact    = (pkgG / rateGs) - onTime;
     const offTime  = Math.round(exact);
     const cycle    = offTime + onTime;
-    const produced = (rate * cycle) / 1000;   // kg
-    const thru     = pkgG / cycle / 1000;     // kg/s
+    const produced = (rateGs * cycle) / 1000;    // kg per timer cycle
     const eff      = (produced / pkg) * 100;
     const overflow = produced > pkg * 1.01;
 
-    setText('r-off',      offTime);
-    setText('r-on',       onTime);
-    setText('r-cycle',    cycle);
-    setText('r-produced', produced.toFixed(3));
-    setText('r-thru',     thru.toFixed(4));
-    setText('r-eff-pct',  eff.toFixed(1) + '%');
+    // Throughput per game cycle (600s)
+    const thruCycle = (rateGs * CYCLE_SECONDS) / 1000; // kg per game cycle
+
+    setText('r-off',  offTime);
+    setText('r-on',   onTime);
+
+    setText('r-thru-cycle', thruCycle.toFixed(1) + ' kg');
+    setText('r-eff-pct',    eff.toFixed(1) + '%');
     el('r-eff-bar').style.width = Math.min(eff, 100) + '%';
     el('r-warn').classList.toggle('show', overflow);
 
-    setText('r-f1',    `(${pkgG}g ÷ ${rate})`);
-    setText('r-f-on',  onTime);
-    setText('r-f-on2', onTime);
-    setText('r-f2',    exact.toFixed(4));
-    setText('r-f3',    offTime);
+    // Update tooltip with current values
+    const timerMain = document.querySelector('.timer-main');
+    if (timerMain) {
+      timerMain.title =
+        'Formula: OFF = round((pkg_g \u00f7 rate) \u2212 on_time)\n' +
+        'OFF = round((' + pkgG + 'g \u00f7 ' + rateGs.toFixed(2) + ') \u2212 ' + onTime + ') = ' + exact.toFixed(4) + ' \u2192 ' + offTime + 's\n' +
+        'Package size: ' + pkg + ' kg (fixed game mechanic)\n' +
+        'Cycle: ' + cycle + 's | Per cycle: ' + produced.toFixed(3) + ' kg';
+    }
   }
 
   function calcSteam() {
@@ -235,7 +271,7 @@
     setText('sc-exact',      `(${exact.toFixed(2)} exact)`);
 
     setText('pc-plates-kg',  platesKg.toLocaleString() + ' kg');
-    setText('pc-plates-sum', `${plates} × 800 kg`);
+    setText('pc-plates-sum', `${plates} \u00d7 800 kg`);
 
     const diffTxt = diff !== 0 ? `${sign}${diff.toLocaleString()} kg` : 'exact';
     const diffSub = diff > 0  ? 'surplus over target'
@@ -286,11 +322,14 @@
       btn.addEventListener('click', () => adjPlates(parseFloat(btn.dataset.delta)))
     );
 
-    el('dormant-btn').addEventListener('click', toggleDormant);
     el('rate-unit-btn').addEventListener('click', toggleRateUnit);
+    el('override-btn').addEventListener('click', toggleOverride);
+    el('detail-toggle').addEventListener('click', toggleDetail);
 
-    ['rate', 'erupt-time', 'erupt-period', 'active-cycles', 'total-cycles', 'kg-tile']
+    ['rate', 'erupt-time', 'erupt-period', 'kg-tile']
       .forEach(id => el(id).addEventListener('input', recalc));
+
+    el('avg-override').addEventListener('input', recalc);
 
     el('dim-w').addEventListener('input', onDimChange);
     el('dim-h').addEventListener('input', onDimChange);
@@ -330,6 +369,9 @@
       defaultBtn.setAttribute('aria-checked', 'true');
       updateVolDisplay('Gold');
     }
+
+    // Apply initial override visual state
+    applyOverrideVisuals();
 
     recalc();
   }

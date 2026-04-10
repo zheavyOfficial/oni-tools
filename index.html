@@ -6,7 +6,7 @@
   <title>ONI Tools</title>
   <link rel="icon" href="assets/images/volcano.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@latest/index.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
 <div class="app">
@@ -111,7 +111,7 @@
                     <rect x="8" y="1" width="6" height="4" fill="#c0d8e8" opacity="0.9"/>
                   </svg>
                 </div>
-                <span class="vol-name">Alum.</span>
+                <span class="vol-name">Aluminium</span>
               </button>
 
               <button class="vol-btn" role="radio" aria-checked="false" data-vol="Niobium" style="--mat-clr:#d0a8e0">
@@ -124,7 +124,7 @@
                     <rect x="8" y="1" width="6" height="4" fill="#d0a8e0" opacity="0.9"/>
                   </svg>
                 </div>
-                <span class="vol-name">Niob.</span>
+                <span class="vol-name">Niobium</span>
               </button>
 
               <button class="vol-btn" role="radio" aria-checked="false" data-vol="Tungsten" style="--mat-clr:#c8b890">
@@ -137,12 +137,12 @@
                     <rect x="8" y="1" width="6" height="4" fill="#c8b890" opacity="0.9"/>
                   </svg>
                 </div>
-                <span class="vol-name">Tung.</span>
+                <span class="vol-name">Tungsten</span>
               </button>
 
               <button class="vol-btn" role="radio" aria-checked="false" data-vol="Magma" style="--mat-clr:#e85030">
                 <div class="vol-icon-wrap" aria-hidden="true">
-                  <img src="assets/images/magma_volcano.png" alt="">
+                  <img src="assets/images/volcano.png" alt="">
                   <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                     <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#e85030" stroke-width="0.8"/>
                     <polygon points="5,21 11,10 17,21" fill="#333"/>
@@ -155,7 +155,7 @@
 
               <button class="vol-btn" role="radio" aria-checked="false" data-vol="Minor Magma" style="--mat-clr:#c84828">
                 <div class="vol-icon-wrap" aria-hidden="true">
-                  <img src="assets/images/minor_magma_volcano.png" alt="">
+                  <img src="assets/images/volcano.png" alt="">
                   <svg style="display:none" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                     <polygon points="1,21 11,2 21,21" fill="#2a2a2a" stroke="#c84828" stroke-width="0.8"/>
                     <polygon points="5,21 11,10 17,21" fill="#333"/>
@@ -163,88 +163,91 @@
                     <rect x="8" y="1" width="6" height="4" fill="#c84828" opacity="0.9"/>
                   </svg>
                 </div>
-                <span class="vol-name">Minor</span>
+                <span class="vol-name">Minor Magma</span>
               </button>
 
             </div><!-- /vol-grid -->
           </div><!-- /sb-group type -->
 
-          <!-- Eruption Rate -->
-          <div class="sb-group">
-            <div class="rate-hdr">
-              <span class="sb-lbl">Eruption Rate</span>
-              <button class="unit-toggle" id="rate-unit-btn" aria-label="Toggle rate unit">kg/s</button>
-            </div>
-            <div class="step-wrap highlight" id="rate-wrap">
-              <button class="step-btn" data-target="rate" data-delta="-10" aria-label="−10">−10</button>
-              <button class="step-btn" data-target="rate" data-delta="-1"  aria-label="−1">−1</button>
-              <input class="step-input sz-md" type="number" id="rate" value="0.3" step="0.1" min="0.001" aria-label="Eruption rate">
-              <div class="unit-tag" id="rate-unit-tag" aria-hidden="true">kg/s</div>
-              <button class="step-btn right" data-target="rate" data-delta="1"  aria-label="+1">+1</button>
-              <button class="step-btn right" data-target="rate" data-delta="10" aria-label="+10">+10</button>
-            </div>
-          </div>
-
-          <!-- Eruption Period -->
-          <div class="sb-group">
-            <span class="sb-lbl">Eruption Period</span>
-            <div class="period-row">
-              <div class="step-wrap">
-                <button class="step-btn" data-target="erupt-time" data-delta="-1">−</button>
-                <input class="step-input sz-sm" type="number" id="erupt-time" value="60" step="1" min="1" aria-label="Active eruption seconds">
-                <div class="unit-tag" aria-hidden="true">s</div>
-                <button class="step-btn right" data-target="erupt-time" data-delta="1">+</button>
-              </div>
-              <span class="period-sep">every</span>
-              <div class="step-wrap">
-                <button class="step-btn" data-target="erupt-period" data-delta="-10">−</button>
-                <input class="step-input sz-sm" type="number" id="erupt-period" value="600" step="1" min="1" aria-label="Total eruption cycle seconds">
-                <div class="unit-tag" aria-hidden="true">s</div>
-                <button class="step-btn right" data-target="erupt-period" data-delta="10">+</button>
-              </div>
-            </div>
-            <span class="field-hint">active s / total s per eruption cycle</span>
-          </div>
-
-          <!-- Active Period -->
-          <div class="sb-group">
-            <span class="sb-lbl">Active Period</span>
-            <div class="period-row">
-              <div class="step-wrap">
-                <button class="step-btn" data-target="active-cycles" data-delta="-1">−</button>
-                <input class="step-input sz-sm" type="number" id="active-cycles" value="25" step="1" min="1" aria-label="Active cycles">
-                <div class="unit-tag" aria-hidden="true">cy</div>
-                <button class="step-btn right" data-target="active-cycles" data-delta="1">+</button>
-              </div>
-              <span class="period-sep">every</span>
-              <div class="step-wrap">
-                <button class="step-btn" data-target="total-cycles" data-delta="-1">−</button>
-                <input class="step-input sz-sm" type="number" id="total-cycles" value="60" step="1" min="1" aria-label="Total cycles including dormancy">
-                <div class="unit-tag" aria-hidden="true">cy</div>
-                <button class="step-btn right" data-target="total-cycles" data-delta="1">+</button>
-              </div>
-            </div>
-            <span class="field-hint">active cy / total cy (active + dormant)</span>
-          </div>
-
-          <!-- Next Dormancy / Next Active -->
-          <div class="sb-group">
-            <div class="dormancy-hdr">
-              <span class="sb-lbl" id="dormancy-label">Next Dormancy</span>
-              <button class="dormant-btn" id="dormant-btn" aria-pressed="false">Dormant</button>
-            </div>
-            <div class="step-wrap" id="dormancy-wrap">
-              <button class="step-btn" data-target="next-dormancy" data-delta="-1">−</button>
-              <input class="step-input sz-sm" type="number" id="next-dormancy" value="10" step="1" min="0" aria-label="Cycles until next dormancy">
-              <div class="unit-tag" aria-hidden="true">cycles</div>
-              <button class="step-btn right" data-target="next-dormancy" data-delta="1">+</button>
-            </div>
-          </div>
-
-          <!-- Avg Output -->
+          <!-- Avg Output (top of inputs) -->
           <div class="avg-output-box">
-            <span class="avg-output-lbl">Avg Output</span>
-            <span class="avg-output-val" id="avg-output-val">— g/s</span>
+            <div class="avg-output-hdr">
+              <span class="avg-output-lbl">Avg Output</span>
+              <button class="override-btn active" id="override-btn" aria-pressed="true">Override</button>
+            </div>
+            <div class="avg-output-body">
+              <span class="avg-output-val" id="avg-output-val" style="display:none">— g/s</span>
+              <div class="avg-override-wrap" id="avg-override-wrap">
+                <div class="step-wrap highlight">
+                  <button class="step-btn" data-target="avg-override" data-delta="-50" aria-label="−50">−50</button>
+                  <button class="step-btn" data-target="avg-override" data-delta="-10" aria-label="−10">−10</button>
+                  <button class="step-btn" data-target="avg-override" data-delta="-1"  aria-label="−1">−1</button>
+                  <input class="step-input sz-md" type="number" id="avg-override" value="300" step="1" min="0.1" aria-label="Override avg output in g/s">
+                  <div class="unit-tag" aria-hidden="true">g/s</div>
+                  <button class="step-btn right" data-target="avg-override" data-delta="1"  aria-label="+1">+1</button>
+                  <button class="step-btn right" data-target="avg-override" data-delta="10" aria-label="+10">+10</button>
+                  <button class="step-btn right" data-target="avg-override" data-delta="50" aria-label="+50">+50</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Collapsible eruption params (shown when override is OFF) -->
+            <div class="override-detail" id="override-detail" style="display:none">
+              <button class="detail-toggle" id="detail-toggle" aria-expanded="false">
+                <span class="detail-toggle-icon">&#9654;</span>
+                <span>Eruption Parameters</span>
+              </button>
+              <div class="detail-body" id="detail-body" style="display:none">
+
+                <!-- Eruption Rate -->
+                <div class="sb-group">
+                  <div class="rate-hdr">
+                    <span class="sb-lbl">Eruption Rate</span>
+                    <button class="unit-toggle" id="rate-unit-btn" aria-label="Toggle rate unit">kg/s</button>
+                  </div>
+                  <div class="step-wrap highlight" id="rate-wrap">
+                    <button class="step-btn" data-target="rate" data-delta="-100" aria-label="−100">−100</button>
+                    <button class="step-btn" data-target="rate" data-delta="-10"  aria-label="−10">−10</button>
+                    <button class="step-btn" data-target="rate" data-delta="-1"   aria-label="−1">−1</button>
+                    <input class="step-input sz-md" type="number" id="rate" value="0.3" step="0.1" min="0.001" aria-label="Eruption rate">
+                    <div class="unit-tag" id="rate-unit-tag" aria-hidden="true">kg/s</div>
+                    <button class="step-btn right" data-target="rate" data-delta="1"   aria-label="+1">+1</button>
+                    <button class="step-btn right" data-target="rate" data-delta="10"  aria-label="+10">+10</button>
+                    <button class="step-btn right" data-target="rate" data-delta="100" aria-label="+100">+100</button>
+                  </div>
+                </div>
+
+                <!-- Eruption Period -->
+                <div class="sb-group">
+                  <span class="sb-lbl">Eruption Period</span>
+                  <div class="period-row">
+                    <div class="step-wrap">
+                      <button class="step-btn" data-target="erupt-time" data-delta="-50" aria-label="−50">−50</button>
+                      <button class="step-btn" data-target="erupt-time" data-delta="-10" aria-label="−10">−10</button>
+                      <button class="step-btn" data-target="erupt-time" data-delta="-1"  aria-label="−1">−1</button>
+                      <input class="step-input sz-sm" type="number" id="erupt-time" value="60" step="1" min="1" aria-label="Active eruption seconds">
+                      <div class="unit-tag" aria-hidden="true">s</div>
+                      <button class="step-btn right" data-target="erupt-time" data-delta="1"  aria-label="+1">+1</button>
+                      <button class="step-btn right" data-target="erupt-time" data-delta="10" aria-label="+10">+10</button>
+                      <button class="step-btn right" data-target="erupt-time" data-delta="50" aria-label="+50">+50</button>
+                    </div>
+                    <span class="period-sep">every</span>
+                    <div class="step-wrap">
+                      <button class="step-btn" data-target="erupt-period" data-delta="-50" aria-label="−50">−50</button>
+                      <button class="step-btn" data-target="erupt-period" data-delta="-10" aria-label="−10">−10</button>
+                      <button class="step-btn" data-target="erupt-period" data-delta="-1"  aria-label="−1">−1</button>
+                      <input class="step-input sz-sm" type="number" id="erupt-period" value="600" step="1" min="1" aria-label="Total eruption cycle seconds">
+                      <div class="unit-tag" aria-hidden="true">s</div>
+                      <button class="step-btn right" data-target="erupt-period" data-delta="1"  aria-label="+1">+1</button>
+                      <button class="step-btn right" data-target="erupt-period" data-delta="10" aria-label="+10">+10</button>
+                      <button class="step-btn right" data-target="erupt-period" data-delta="50" aria-label="+50">+50</button>
+                    </div>
+                  </div>
+                  <span class="field-hint">active s / total s per eruption cycle</span>
+                </div>
+
+              </div><!-- /detail-body -->
+            </div><!-- /override-detail -->
           </div>
 
         </div><!-- /sb-body volcano -->
@@ -343,7 +346,7 @@
             <div class="bar-accent orange" aria-hidden="true"></div>
             <span class="bar-title">Timer — OFF / ON</span>
           </div>
-          <div class="timer-main" aria-live="polite">
+          <div class="timer-main" aria-live="polite" title="Formula: OFF = round((20000g ÷ avg_g/s) − 1s)&#10;Package size: 20 kg (fixed game mechanic)">
             <div class="t-block">
               <div class="t-lbl">Off Duration</div>
               <div class="t-num off" id="r-off">—</div>
@@ -356,19 +359,9 @@
               <div class="t-unit">seconds</div>
             </div>
           </div>
-          <div class="stat-row" aria-live="polite">
-            <div class="stat-cell">
-              <div class="s-lbl">Cycle</div>
-              <div class="s-val"><span id="r-cycle">—</span> <small>s</small></div>
-            </div>
-            <div class="stat-cell">
-              <div class="s-lbl">Per Cycle</div>
-              <div class="s-val"><span id="r-produced">—</span> <small>kg</small></div>
-            </div>
-            <div class="stat-cell">
-              <div class="s-lbl">Throughput</div>
-              <div class="s-val"><span id="r-thru">—</span> <small>kg/s</small></div>
-            </div>
+          <div class="throughput-row" aria-live="polite" title="Based on timer cycle: (avg_output × 600s) ÷ 1000">
+            <span class="throughput-lbl">Throughput / Game Cycle</span>
+            <span class="throughput-val" id="r-thru-cycle">— kg</span>
           </div>
           <div class="eff-wrap" aria-label="Timer efficiency">
             <span class="eff-label">Efficiency</span>
@@ -376,15 +369,6 @@
               <div class="eff-bar-fill" id="r-eff-bar"></div>
             </div>
             <span class="eff-pct" id="r-eff-pct" aria-live="polite">—</span>
-          </div>
-          <div class="formula-box">
-            <div class="f-lbl">Formula</div>
-            <div class="f-body">
-              X = <span class="hi">(pkg_g ÷ rate)</span> − on_time &nbsp;|&nbsp;
-              X = <span class="hi" id="r-f1">—</span> − <span id="r-f-on">—</span> = <span class="hi" id="r-f2">—</span>
-              &nbsp;→&nbsp;
-              <span class="hi2" id="r-f3">—</span>s OFF / <span class="hi2" id="r-f-on2">—</span>s ON
-            </div>
           </div>
           <div class="warn" id="r-warn" role="alert">
             Accumulation exceeds package — loader may overflow. Reduce OFF by 1s.
@@ -447,6 +431,6 @@
 
 </div><!-- /app -->
 
-<script src="main.js?v=9"></script>
+<script src="main.js?v=10"></script>
 </body>
 </html>
